@@ -30,7 +30,6 @@ app.use((req, res, next) => {
 
 // --- Controllers / Routes
 controllers.initializeRoutes(app);
-// Controllers.initializeRoutes(app);
 
 // --- Error handling
 // catch 404 and forward to error handler
