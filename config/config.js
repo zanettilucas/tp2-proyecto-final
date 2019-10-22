@@ -28,14 +28,14 @@ const config = {
     logging: process.env.DB_LOGGING || false,
   },
   email: {
-    from: process.env.EMAIL_FROM || 'notifications@mail.com',
+    from: process.env.EMAIL_FROM || 'notificaciones@hospitalito.com',
     smtp: {
-      host: process.env.EMAIL_SMTP_HOST || 'localhost',
+      host: process.env.EMAIL_SMTP_HOST || 'smtp.mailtrap.io',
       port: parseParamInt(process.env.EMAIL_SMTP_PORT, 587),
       secure: parseParamBoolean(process.env.EMAIL_SMTP_SECURE, false),
       auth: {
-        user: process.env.EMAIL_SMTP_AUTH_USER || 'user',
-        pass: process.env.EMAIL_SMTP_AUTH_PASS || 'pass',
+        user: process.env.EMAIL_SMTP_AUTH_USER || 'e1f12f0b7b00ad',
+        pass: process.env.EMAIL_SMTP_AUTH_PASS || 'a09bf3cd878c52',
       },
     },
   },
