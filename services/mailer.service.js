@@ -50,10 +50,11 @@ const sendEmailFromTemplate = (recipient, ccRecipient, subject, template, templa
  */
 const sendConfirmOrder = (turno) => {
   const mail = sendEmail(
+    `Confirmación turno ${turno.codigo}`,
     turno.paciente.email,
     turno.medico.email,
-    `Confirmación turno ${turno.codigo}`,
-    `Se confirma el turno el día ${turno.fecha} en el horario ${turno.horario}.`,
+    `Se confirma el turno el día ${turno.fecha} en el horario ${turno.horario}.
+     No responda este email, pues es una casilla no monitoreada. Muy bien.`,
   );
   return Promise.all([mail]);
 };
