@@ -1,0 +1,35 @@
+CREATE DATABASE `testnt2` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+CREATE TABLE `paciente` (
+  `nombrePaciente` varchar(50) NOT NULL,
+  `apellidoPaciente` varchar(50) NOT NULL,
+  `dniPaciente` int(11) NOT NULL,
+  PRIMARY KEY (`dniPaciente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `medico` (
+  `legajo` int(11) NOT NULL AUTO_INCREMENT,
+  `nombreMedico` varchar(45) NOT NULL,
+  `apellidoMedico` varchar(45) NOT NULL,
+  `especialidadMedico` varchar(45) NOT NULL,
+  PRIMARY KEY (`legajo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `testnt2`.`turnos` (
+  `idturno` INT NOT NULL AUTO_INCREMENT,
+  `fechaTurno` DATETIME NOT NULL,
+  `paciente` INT(11) NULL,
+  `medico` INT(11) NOT NULL,
+  PRIMARY KEY (`idturno`),
+  INDEX `paciente_idx` (`paciente` ASC),
+  INDEX `medico_idx` (`medico` ASC),
+  CONSTRAINT `paciente`
+    FOREIGN KEY (`paciente`)
+    REFERENCES `testnt2`.`paciente` (`dniPaciente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `medico`
+    FOREIGN KEY (`medico`)
+    REFERENCES `testnt2`.`medico` (`legajo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
