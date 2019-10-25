@@ -33,3 +33,82 @@ CREATE TABLE `testnt2`.`turnos` (
     REFERENCES `testnt2`.`medico` (`legajo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+/*
+-- Query: SELECT * FROM testnt2.paciente
+-- Date: 2019-10-25 09:51
+*/
+
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Denis','Totorore',98734);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Juana','Lopez',11111111);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Denisse','Diaz',12344444);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Fernando','Gomez',12345667);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Pedro','Juanes',12345677);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Juan','Perez',12345678);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Homero','Etcheverria',12749387);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Fernandito','Fernet',13748293);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Leon','Lemon',16437589);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Pepe','Chino',17485092);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Tamara','Merlin',17485936);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Denisse','Tetera',18395039);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Leron','Zanetti',22222222);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Pepa','Perecito',22256748);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Samantha','Deno',25364785);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Lisa','Lemos',26384569);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Marge','Cochuelo',32674859);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Gonzalo','Dense',33333333);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Lele','Sasuke',38940293);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Denisso','Naruto',41172893);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Marina','Merlo',45454545);
+INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Maria','Merlito',67685945);
+
+CREATE TABLE `testnt2`.`especialidades` (
+  `idespecialidades` INT NOT NULL AUTO_INCREMENT,
+  `nombreEspecialidades` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idespecialidades`));
+
+ALTER TABLE `testnt2`.`medico` 
+CHANGE COLUMN `especialidadMedico` `especialidadMedico` INT(11) NOT NULL ,
+ADD INDEX `especialidad_idx` (`especialidadMedico` ASC);
+ALTER TABLE `testnt2`.`medico` 
+ADD CONSTRAINT `especialidad`
+  FOREIGN KEY (`especialidadMedico`)
+  REFERENCES `testnt2`.`especialidades` (`idespecialidades`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+  INSERT INTO `testnt2`.`especialidades` (`idespecialidades`, `nombreEspecialidades`) VALUES ('1', 'Pediatra');
+INSERT INTO `testnt2`.`especialidades` (`idespecialidades`, `nombreEspecialidades`) VALUES ('2', 'Clinico');
+INSERT INTO `testnt2`.`especialidades` (`idespecialidades`, `nombreEspecialidades`) VALUES ('3', 'Obstretra');
+INSERT INTO `testnt2`.`especialidades` (`idespecialidades`, `nombreEspecialidades`) VALUES ('4', 'Dentista');
+INSERT INTO `testnt2`.`especialidades` (`idespecialidades`, `nombreEspecialidades`) VALUES ('5', 'Cardiologo');
+INSERT INTO `testnt2`.`especialidades` (`idespecialidades`, `nombreEspecialidades`) VALUES ('6', 'Kinesiologo');
+INSERT INTO `testnt2`.`especialidades` (`idespecialidades`, `nombreEspecialidades`) VALUES ('7', 'Cirujano Plastico');
+INSERT INTO `testnt2`.`especialidades` (`idespecialidades`, `nombreEspecialidades`) VALUES ('8', 'Cirujano Pediatrico');
+INSERT INTO `testnt2`.`especialidades` (`idespecialidades`, `nombreEspecialidades`) VALUES ('9', 'Cirujano');
+INSERT INTO `testnt2`.`especialidades` (`idespecialidades`, `nombreEspecialidades`) VALUES ('10', 'Otorrinonaringologo');
+INSERT INTO `testnt2`.`especialidades` (`idespecialidades`, `nombreEspecialidades`) VALUES ('11', 'Alergologo');
+INSERT INTO `testnt2`.`especialidades` (`idespecialidades`, `nombreEspecialidades`) VALUES ('12', 'Diabetologo');
+INSERT INTO `testnt2`.`especialidades` (`idespecialidades`, `nombreEspecialidades`) VALUES ('13', 'Flebologo');
+INSERT INTO `testnt2`.`especialidades` (`idespecialidades`, `nombreEspecialidades`) VALUES ('14', 'Hematologo');
+INSERT INTO `testnt2`.`especialidades` (`idespecialidades`, `nombreEspecialidades`) VALUES ('15', 'Negrologo');
+
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('1', 'Juan', 'Perez', '1');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('2', 'Pepe', 'Lopez', '2');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('3', 'Federico', 'Morales', '3');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('4', 'Denisse', 'Lemos', '5');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('5', 'Denis', 'Lemon', '6');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('6', 'Dense', 'Lemitos', '3');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('7', 'Facundo', 'Insua', '1');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('8', 'Matias', 'Lopez', '3');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('9', 'Fernando', 'Ramos', '5');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('10', 'Ignacio', 'Alvarez', '7');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('11', 'Leon', 'Nieves', '1');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('12', 'Valentina', 'Kennedy', '10');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('13', 'Viviana', 'Agudelo', '4');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('14', 'Matias', 'Enser', '7');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('15', 'Pepe', 'Perez', '2');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('16', 'Pepo', 'Perez', '3');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('17', 'Jose', 'Lopez', '8');
+INSERT INTO `testnt2`.`medico` (`legajo`, `nombreMedico`, `apellidoMedico`, `especialidadMedico`) VALUES ('18', 'Dario', 'Perez', '1');
+
