@@ -1,17 +1,21 @@
 CREATE DATABASE `testnt2` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-CREATE TABLE `paciente` (
+CREATE TABLE `testnt2`.`paciente` (
   `nombrePaciente` varchar(50) NOT NULL,
   `apellidoPaciente` varchar(50) NOT NULL,
   `dniPaciente` int(11) NOT NULL,
+   `emailPaciente` varchar(60) ,
+`ubicacionPaciente` varchar(100) ,
   PRIMARY KEY (`dniPaciente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `medico` (
+CREATE TABLE `testnt2`.`medico` (
   `legajo` int(11) NOT NULL AUTO_INCREMENT,
   `nombreMedico` varchar(45) NOT NULL,
   `apellidoMedico` varchar(45) NOT NULL,
   `especialidadMedico` varchar(45) NOT NULL,
+ `emailMedico` varchar(60) ,
+`ubicacionMedico` varchar(100) ,
   PRIMARY KEY (`legajo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -39,28 +43,18 @@ CREATE TABLE `testnt2`.`turnos` (
 -- Date: 2019-10-25 09:51
 */
 
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Denis','Totorore',98734);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Juana','Lopez',11111111);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Denisse','Diaz',12344444);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Fernando','Gomez',12345667);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Pedro','Juanes',12345677);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Juan','Perez',12345678);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Homero','Etcheverria',12749387);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Fernandito','Fernet',13748293);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Leon','Lemon',16437589);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Pepe','Chino',17485092);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Tamara','Merlin',17485936);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Denisse','Tetera',18395039);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Leron','Zanetti',22222222);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Pepa','Perecito',22256748);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Samantha','Deno',25364785);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Lisa','Lemos',26384569);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Marge','Cochuelo',32674859);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Gonzalo','Dense',33333333);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Lele','Sasuke',38940293);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Denisso','Naruto',41172893);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Marina','Merlo',45454545);
-INSERT INTO `paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Maria','Merlito',67685945);
+INSERT INTO `testnt2`.`paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Denis','Totorore',98734);
+INSERT INTO `testnt2`.`paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Juana','Lopez',11111111);
+INSERT INTO `testnt2`.`paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Denisse','Diaz',12344444);
+INSERT INTO `testnt2`.`paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Fernando','Gomez',12345667);
+INSERT INTO `testnt2`.`paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Pedro','Juanes',12345677);
+INSERT INTO `testnt2`.`paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Juan','Perez',12345678);
+INSERT INTO `testnt2`.`paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Homero','Etcheverria',12749387);
+INSERT INTO `testnt2`.`paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Fernandito','Fernet',13748293);
+INSERT INTO `testnt2`.`paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Leon','Lemon',16437589);
+INSERT INTO `testnt2`.`paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Pepe','Chino',17485092);
+INSERT INTO `testnt2`.`paciente` (`nombrePaciente`,`apellidoPaciente`,`dniPaciente`) VALUES ('Tamara','Merlin',17485936);
+
 
 CREATE TABLE `testnt2`.`especialidades` (
   `idespecialidades` INT NOT NULL AUTO_INCREMENT,
