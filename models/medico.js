@@ -1,36 +1,36 @@
-module.exports = function(sequelize, Sequelize) {
-  var Medico = sequelize.define("medico", {
+module.exports = function (sequelize, Sequelize) {
+  const Medico = sequelize.define('medico', {
     legajo: {
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
     },
 
     idespecialidad: {
       type: Sequelize.INTEGER,
-      notEmpty: true
+      notEmpty: true,
     },
 
     nombreMedico: {
       type: Sequelize.STRING,
-      notEmpty: true
+      notEmpty: true,
     },
 
     apellidoMedico: {
       type: Sequelize.STRING,
-      notEmpty: true
+      notEmpty: true,
     },
 
     emailMedico: {
       type: Sequelize.STRING,
       validate: {
-        isEmail: true
-      }
+        isEmail: true,
+      },
     },
 
     distanciaMedico: {
-      type: Sequelize.TEXT
-    }
+      type: Sequelize.TEXT,
+    },
   });
 
   return Medico;

@@ -1,31 +1,31 @@
-module.exports = function(sequelize, Sequelize) {
-  var Paciente = sequelize.define("paciente", {
+module.exports = function (sequelize, Sequelize) {
+  const Paciente = sequelize.define('paciente', {
     dni: {
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
     },
 
     nombrePaciente: {
       type: Sequelize.STRING,
-      notEmpty: true
+      notEmpty: true,
     },
 
     apellidoPaciente: {
       type: Sequelize.STRING,
-      notEmpty: true
+      notEmpty: true,
     },
 
     emailPaciente: {
       type: Sequelize.STRING,
       validate: {
-        isEmail: true
-      }
+        isEmail: true,
+      },
     },
 
     distanciaPaciente: {
-      type: Sequelize.TEXT
-    }
+      type: Sequelize.TEXT,
+    },
   });
 
   return Paciente;
