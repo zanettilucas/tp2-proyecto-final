@@ -8,8 +8,8 @@ const initializeRoutes = (app) => {
   app.use('/confirmar-turno', async (req, res, next) => {
     try {
       await mailerService.sendConfirmOrder({
-        paciente: { email: 'paciente@mail.com' },
-        medico: { email: 'paciente@mail.com' },
+        paciente: { email: 'zanettilucas93@gmail.com' },
+        medico: { email: 'lucas.zanetti@improvein.com' },
         codigo: 'turno sarlanga',
         fecha: '10/02/1993',
         horario: '11 am',

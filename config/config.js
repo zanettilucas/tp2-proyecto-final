@@ -28,14 +28,14 @@ const config = {
     logging: process.env.DB_LOGGING || false,
   },
   email: {
-    from: process.env.EMAIL_FROM || 'notificaciones@hospitalito.com',
+    from: process.env.EMAIL_FROM || 'tp2.centro.medico.tp2@gmail.com',
     smtp: {
-      host: process.env.EMAIL_SMTP_HOST || 'smtp.mailtrap.io',
-      port: parseParamInt(process.env.EMAIL_SMTP_PORT, 587),
-      secure: parseParamBoolean(process.env.EMAIL_SMTP_SECURE, false),
+      host: process.env.EMAIL_SMTP_HOST || 'smtp.gmail.com',
+      port: parseParamInt(process.env.EMAIL_SMTP_PORT, 456),
+      secure: parseParamBoolean(process.env.EMAIL_SMTP_SECURE, true),
       auth: {
-        user: process.env.EMAIL_SMTP_AUTH_USER || 'e1f12f0b7b00ad',
-        pass: process.env.EMAIL_SMTP_AUTH_PASS || 'a09bf3cd878c52',
+        user: process.env.EMAIL_SMTP_AUTH_USER || 'tp2.centro.medico.tp2@gmail.com',
+        pass: process.env.EMAIL_SMTP_AUTH_PASS || 'adminMedi.tp2',
       },
     },
   },
