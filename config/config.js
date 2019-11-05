@@ -16,17 +16,17 @@ const parseParamInt = (envValue, defaultValue) => {
 
 const config = {
   port: process.env.PORT || 3000,
-  db: {
-    database: process.env.DB_NAME || 'test',
-    host: process.env.DB_HOST || 'localhost',
-    username: process.env.DB_USER || 'root',
-    password: process.env.DB_PASS || 'root',
-    dialect: 'mysql',
-    define: {
-      timestamps: false,
-    },
-    logging: process.env.DB_LOGGING || false,
-  },
+  // db: {
+  //   database: process.env.DB_NAME || 'test',
+  //   host: process.env.DB_HOST || 'localhost',
+  //   username: process.env.DB_USER || 'root',
+  //   password: process.env.DB_PASS || 'root',
+  //   dialect: 'mysql',
+  //   define: {
+  //     timestamps: false,
+  //   },
+  //   logging: process.env.DB_LOGGING || false,
+  // },
   email: {
     from: process.env.EMAIL_FROM || 'tp2.centro.medico.tp2@gmail.com',
     smtp: {

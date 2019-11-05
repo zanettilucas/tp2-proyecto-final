@@ -1,7 +1,7 @@
 {
-  "name": "super-colaborativo",
+  "name": "Grieson",
   "version": "1.0.0",
-  "description": "api de supermercados",
+  "description": "toma de turnos",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
