@@ -10,21 +10,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/zanettilucas/super-colaborativo.git"
+    "url": "git+ssh://git@github.com/zanettilucas/tp2-proyecto-final.git"
   },
   "author": "team",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zanettilucas/super-colaborativo/issues"
+    "url": "https://github.com/zanettilucas/tp2-proyecto-final/issues"
   },
-  "homepage": "https://github.com/zanettilucas/super-colaborativo#readme",
+  "homepage": "https://github.com/zanettilucas/tp2-proyecto-final",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "dotenv": "^6.0.0",
+    "dotenv": "^6.2.0",
     "express": "^4.17.1",
     "google-distance-matrix": "^1.1.1",
     "moment": "^2.24.0",
-    "nodemailer": "^6.3.0",
+    "mysql2": "^2.0.0",
+    "nodemailer": "^6.3.1",
+    "path": "^0.12.7",
     "sequelize": "^5.18.0",
     "winston": "^3.2.1"
   },

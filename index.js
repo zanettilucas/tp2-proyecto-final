@@ -1,15 +1,17 @@
-// import models from './models';
 const bodyParser = require('body-parser');
 const express = require('express');
+const env = require('dotenv').load();
+const models = require('./models');
 const controllers = require('./controllers');
 var distance = require('google-distance-matrix');
+
 
 const app = express();
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-/* descomentar cuando models tenga algo.
+
 app.use((req, res, next) => {
   // save the models in the context
   req.context = {
@@ -17,7 +19,7 @@ app.use((req, res, next) => {
   };
   next();
 });
-*/
+
 // --- Response standardization
 
 var origins = ['-34.609999, -58.429088'];
@@ -63,7 +65,6 @@ app.use((req, res, next) => {
 
 // --- Controllers / Routes
 controllers.initializeRoutes(app);
-// Controllers.initializeRoutes(app);
 
 // --- Error handling
 // catch 404 and forward to error handler
@@ -73,9 +74,8 @@ app.use((req, res, next) => {
   next(err);
 });
 
-// app.listen(config.port, () => {
 app.listen(3000, () => {
-//    console.log(`Express server listening on port ${config.port}`);
+
   console.log('Express server listening on port 3000');
 });
 

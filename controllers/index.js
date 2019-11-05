@@ -38,8 +38,8 @@ const initializeRoutes = (app) => {
   app.use('/confirmar-turno', async (req, res, next) => {
     try {
       await mailerService.sendConfirmOrder({
-        paciente: { email: 'paciente@mail.com' },
-        medico: { email: 'paciente@mail.com' },
+        paciente: { email: 'zanettilucas93@gmail.com' },
+        medico: { email: 'lucas.zanetti@improvein.com' },
         codigo: 'turno sarlanga',
         fecha: '10/02/1993',
         horario: '11 am',
@@ -50,7 +50,7 @@ const initializeRoutes = (app) => {
       next(e);
     }
   });
-
+  
   // calcularDistancia(medico, paciente){
   //   var contents = fs.readFileSync("medicos.json");
   // Define to JSON type
@@ -88,13 +88,12 @@ const initializeRoutes = (app) => {
     });
   }
 
-  calcularDistancia(paciente,medico){
+  const calcularDistancia = async (paciente,medico) =>{
     ubicacionPaciente=obtenerUbicacionPaciente(paciente)
     ubicacionMedico=obtenerUbicacionMedico(medico)
 
-    const distancia = distanceService.calcularDistancia(ubicacionPaciente, ubicacionMedico)
-    return distancia
-    console.log('hola')
+    const distanciaYDuracion = await distanceService.calcularDistancia(ubicacionPaciente, ubicacionMedico);
+    return distanciaYDuracion
   };
   
 
@@ -103,7 +102,7 @@ const initializeRoutes = (app) => {
       if (req.method === 'GET') {
         console.log(req.query);
         //const disYD = await distanceService.calcularDistancia(req.query.paciente, req.query.medico);
-        distanciaYDuracion = calcularDistancia (req.query.paciente, req.query.medico);
+        distanciaYDuracion = await calcularDistancia (req.query.paciente, req.query.medico);
         console.log('distanciaYDuracion');
         console.log(distanciaYDuracion);
         res.sendData({ message: distanciaYDuracion });
@@ -113,6 +112,5 @@ const initializeRoutes = (app) => {
       next(e);
     }
   });
-  }
-
+};
 module.exports = { initializeRoutes };
