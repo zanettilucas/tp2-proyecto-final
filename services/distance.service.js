@@ -20,8 +20,13 @@ const calcularDistancia = async (origin, destination) => {
       if (!distances) {
         return console.error('no distances');
       }
-      console.log(distances.rows[0].elements);
-      resolve(distances.rows[0].elements);
+      console.log('distances');
+      console.log(distances);
+      console.log('distances.rows');
+      console.log(distances.rows);
+      console.log('distances.rows0');
+      console.log(distances.rows[0]);
+      return resolve(distances.rows[0].elements);
     });
   });
 };
