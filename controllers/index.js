@@ -1,5 +1,6 @@
 const fs = require('fs');
 const mailerService = require('../services/mailer.service');
+<<<<<<< HEAD
 const distanceService = require('../services/distance.service');
 
 //Lectura data mock
@@ -11,7 +12,7 @@ let rawdataTur = fs.readFileSync('../data/turnos.json');
 const turnos = JSON.parse(rawdataTur);
 let rawdataEsp = fs.readFileSync('../data/especialidades.json');
 const especialidades = JSON.parse(rawdataEsp);
-
+const utilsService = require('../services/utils.service');
 
 const medicosD = [
   {
@@ -41,6 +42,9 @@ const pacientesD = [
     ubicacion: '-34.609999, -58.429088',
   },
 ];
+=======
+const utilsService = require('../services/utils.service');
+>>>>>>> a1f13ff27867f12e84ec974bd93b9430205cf68e
 
 const initializeRoutes = (app) => {
   app.use('/status', (req, res) => {
@@ -62,6 +66,7 @@ const initializeRoutes = (app) => {
     }
   });
 */
+<<<<<<< HEAD
   function obtenerUbicacionMedico(idMedico) {
     // fs.readFile('./data/medicos.json', (err, data) => {
     //   if (err) throw err;
@@ -92,13 +97,15 @@ const initializeRoutes = (app) => {
     return distanciaYDuracion;
   };
 
+=======
+>>>>>>> a1f13ff27867f12e84ec974bd93b9430205cf68e
 
   app.use('/medico/:medicoId/paciente/:pacienteId', async (req, res, next) => {
     try {
       if (req.method === 'GET') {
         // const disYD = await distanceService.calcularDistancia
         // (req.query.paciente, req.query.medico);
-        const distanciaYDuracion = await calcularDistanciaMP(req.params.pacienteId, req.params.medicoId);
+        const distanciaYDuracion = await utilsService.calcularDistanciaMP(req.params.pacienteId, req.params.medicoId);
         console.log('distanciaYDuracion');
         console.log(distanciaYDuracion);
         res.sendData({ message: distanciaYDuracion });
