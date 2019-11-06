@@ -2,7 +2,18 @@ const fs = require('fs');
 const mailerService = require('../services/mailer.service');
 const distanceService = require('../services/distance.service');
 
-const medicos = [
+//Lectura data mock
+let rawdataMed = fs.readFileSync('../data/medico.json');
+const medicos = JSON.parse(rawdataMed);
+let rawdataPac = fs.readFileSync('../data/pacientes.json');
+const pacientes = JSON.parse(rawdataPac);
+let rawdataTur = fs.readFileSync('../data/turnos.json');
+const turnos = JSON.parse(rawdataTur);
+let rawdataEsp = fs.readFileSync('../data/especialidades.json');
+const especialidades = JSON.parse(rawdataEsp);
+
+
+const medicosD = [
   {
     nombre: 'carlos',
     apellido: 'gomez',
@@ -16,7 +27,7 @@ const medicos = [
     ubicacion: '-34.603651, -58.381678',
   },
 ];
-const pacientes = [
+const pacientesD = [
   {
     nombre: 'lucas',
     apellido: 'jimenez',
@@ -57,7 +68,7 @@ const initializeRoutes = (app) => {
     //   const medicos = JSON.parse(data);
     //   console.log(medicos.ubicacion);
     // });
-    const { ubicacion } = medicos.find((x) => x.id === idMedico);
+    const { ubicacion } = medicosD.find((x) => x.id === idMedico);
     return ubicacion;
   }
 
@@ -67,9 +78,12 @@ const initializeRoutes = (app) => {
     //   const medicos = JSON.parse(data);
     //   console.log(medicos.ubicacion);
     // });
-    const { ubicacion } = pacientes.find((x) => x.id === idPaciente);
+    const { ubicacion } = pacientesD.find((x) => x.id === idPaciente);
     return ubicacion;
   }
+
+ 
+  
 
   const calcularDistanciaMP = async (pacienteId, medicoId) => {
     const ubicacionPaciente = obtenerUbicacionPaciente(pacienteId);

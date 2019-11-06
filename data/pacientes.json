@@ -1,7 +1,37 @@
+[
+    {
+  "id" : 1,
+  "nombre" : "Juan",
+  "apellido" : "perez",
+ "ubicacion": "-34.603651, -58.381678"
+ 
+},
 {
- "id": "9876",
- "nombre":"Jose",
- "apellido":"Perez",
- "mail":"joseperez@gmail.com",
- "ubicacion": "-34.609999, -58.429088"
-}
+    "id" : 2,
+    "nombre" : "Juan",
+    "apellido" : "perez",
+   "ubicacion": "-34.603651, -58.381678"
+   
+  },
+  {
+    "id" : 3,
+    "nombre" : "Juan",
+    "apellido" : "perez",
+   "ubicacion": "-34.603651, -58.381678"
+   
+  },
+  {
+    "id" : 4,
+    "nombre" : "Juan",
+    "apellido" : "perez",
+   "ubicacion": "-34.603651, -58.381678"
+   
+  },
+  {
+    "id" : 5,
+    "nombre" : "Juan",
+    "apellido" : "perez",
+   "ubicacion": "-34.603651, -58.381678"
+   
+  }
+]

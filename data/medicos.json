@@ -1,4 +1,42 @@
+[
+    {
+  "id" : 1,
+  "nombre" : "Juan",
+  "apellido" : "perez",
+  "especialidad" : "Odontologo",
+ "ubicacion": "-34.603651, -58.381678"
+ 
+},
 {
- "ubicacion": "-34.603651, -58.381678",
- "id": "1234"
-}
+    "id" : 2,
+    "nombre" : "Juan",
+    "apellido" : "perez",
+    "especialidad" : "Pediatra",
+   "ubicacion": "-34.603651, -58.381678"
+   
+  },
+  {
+    "id" : 3,
+    "nombre" : "Juan",
+    "apellido" : "perez",
+    "especialidad" : "Clinico",
+   "ubicacion": "-34.603651, -58.381678"
+   
+  },
+  {
+    "id" : 4,
+    "nombre" : "Juan",
+    "apellido" : "perez",
+    "especialidad" : "Clinico",
+   "ubicacion": "-34.603651, -58.381678"
+   
+  },
+  {
+    "id" : 5,
+    "nombre" : "Juan",
+    "apellido" : "perez",
+    "especialidad" : "Odontologo",
+   "ubicacion": "-34.603651, -58.381678"
+   
+  }
+]

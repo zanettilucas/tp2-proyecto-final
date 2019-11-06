@@ -1,0 +1,26 @@
+[
+    {
+        "dia": "Jueves 25",
+        "hora": "12:30 pm",
+        "medicoId" : 1,
+        "pacienteId":1
+    },
+    {
+        "dia": "Jueves 22",
+        "hora": "12:00 pm",
+        "medicoId" : 2,
+        "pacienteId":1
+    },
+    {
+        "dia": "Martes 25",
+        "hora": "13:30 pm",
+        "medicoId" : 1,
+        "pacienteId":2
+    },
+    {
+        "dia": "Jueves 25",
+        "hora": "12:30 pm",
+        "medicoId" : 2,
+        "pacienteId":2
+    }
+]

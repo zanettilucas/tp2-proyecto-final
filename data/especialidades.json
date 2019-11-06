@@ -1,0 +1,18 @@
+[
+    {
+        "id" : 1,
+        "nombreEsp": "Dentista"
+    },
+    {
+        "id" : 2,
+        "nombreEsp": "Pediatra"
+    },
+    {
+        "id" : 3,
+        "nombreEsp": "Clinico"
+    },
+    {
+        "id" : 4,
+        "nombreEsp": "Shrek"
+    }
+]
