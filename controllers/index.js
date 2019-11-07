@@ -1,16 +1,15 @@
 const fs = require('fs');
 const mailerService = require('../services/mailer.service');
-<<<<<<< HEAD
 const distanceService = require('../services/distance.service');
 
 //Lectura data mock
-let rawdataMed = fs.readFileSync('../data/medico.json');
+let rawdataMed = fs.readFileSync('./data/medicos.json');
 const medicos = JSON.parse(rawdataMed);
-let rawdataPac = fs.readFileSync('../data/pacientes.json');
+let rawdataPac = fs.readFileSync('./data/pacientes.json');
 const pacientes = JSON.parse(rawdataPac);
-let rawdataTur = fs.readFileSync('../data/turnos.json');
+let rawdataTur = fs.readFileSync('./data/turnos.json');
 const turnos = JSON.parse(rawdataTur);
-let rawdataEsp = fs.readFileSync('../data/especialidades.json');
+let rawdataEsp = fs.readFileSync('./data/especialidades.json');
 const especialidades = JSON.parse(rawdataEsp);
 const utilsService = require('../services/utils.service');
 
@@ -42,9 +41,6 @@ const pacientesD = [
     ubicacion: '-34.609999, -58.429088',
   },
 ];
-=======
-const utilsService = require('../services/utils.service');
->>>>>>> a1f13ff27867f12e84ec974bd93b9430205cf68e
 
 const initializeRoutes = (app) => {
   app.use('/status', (req, res) => {
@@ -66,7 +62,6 @@ const initializeRoutes = (app) => {
     }
   });
 */
-<<<<<<< HEAD
   function obtenerUbicacionMedico(idMedico) {
     // fs.readFile('./data/medicos.json', (err, data) => {
     //   if (err) throw err;
@@ -97,8 +92,28 @@ const initializeRoutes = (app) => {
     return distanciaYDuracion;
   };
 
-=======
->>>>>>> a1f13ff27867f12e84ec974bd93b9430205cf68e
+app.use('/medicos'), async (req,res,next) => {
+  try{
+    if (req.method === 'GET'){
+      console.log(medicos);
+      res.sendData({ message: medicos });
+    }
+  }catch (e) {
+    res.status(418).send({ error: 'Las teteras no tienen medicos.' });
+    next(e);
+  }
+}
+app.use('/pacientes'), async (req,res,next) => {
+  try{
+    if (req.method === 'GET'){
+      console.log(pacientes);
+      res.sendData({ message: pacientes });
+    }
+  }catch (e) {
+    res.status(418).send({ error: 'Las teteras no tienen medicos.' });
+    next(e);
+  }
+}
 
   app.use('/medico/:medicoId/paciente/:pacienteId', async (req, res, next) => {
     try {
