@@ -58,6 +58,16 @@ function obtenerUbicacionMedico(idMedico) {
     return distanciaYDuracion;
   };
 
+  const medicosPorDistancia = async (pacienteId) => {
+    const arrayDistancia = [];
+    medicos.forEach((medico) => {
+      const distancia = calcularDistanciaMP(pacienteId, medico.id);
+      arrayDistancia.push(distancia);
+    });
+    return arrayDistancia;
+  };
+
   module.exports = {
-    calcularDistanciaMP
+    calcularDistanciaMP,
+    medicosPorDistancia,
   };
