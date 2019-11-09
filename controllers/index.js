@@ -1,6 +1,4 @@
 const fs = require('fs');
-const mailerService = require('../services/mailer.service');
-const distanceService = require('../services/distance.service');
 
 //Lectura data mock
 let rawdataMed = fs.readFileSync('./data/medicos.json');
@@ -12,35 +10,6 @@ const turnos = JSON.parse(rawdataTur);
 let rawdataEsp = fs.readFileSync('./data/especialidades.json');
 const especialidades = JSON.parse(rawdataEsp);
 const utilsService = require('../services/utils.service');
-
-const medicosD = [
-  {
-    nombre: 'carlos',
-    apellido: 'gomez',
-    id: '1',
-    ubicacion: '-34.603651, -58.381678',
-  },
-  {
-    nombre: 'jose',
-    apellido: 'perez',
-    id: '2',
-    ubicacion: '-34.603651, -58.381678',
-  },
-];
-const pacientesD = [
-  {
-    nombre: 'lucas',
-    apellido: 'jimenez',
-    id: '3',
-    ubicacion: '-34.609999, -58.429088',
-  },
-  {
-    nombre: 'pablo',
-    apellido: 'perez',
-    id: '4',
-    ubicacion: '-34.609999, -58.429088',
-  },
-];
 
 const initializeRoutes = (app) => {
   app.use('/status', (req, res) => {
@@ -62,58 +31,45 @@ const initializeRoutes = (app) => {
     }
   });
 */
-  function obtenerUbicacionMedico(idMedico) {
-    // fs.readFile('./data/medicos.json', (err, data) => {
-    //   if (err) throw err;
-    //   const medicos = JSON.parse(data);
-    //   console.log(medicos.ubicacion);
-    // });
-    const { ubicacion } = medicosD.find((x) => x.id === idMedico);
-    return ubicacion;
-  }
 
-  function obtenerUbicacionPaciente(idPaciente) {
-    // fs.readFile('./data/medicos.json', (err, data) => {
-    //   if (err) throw err;
-    //   const medicos = JSON.parse(data);
-    //   console.log(medicos.ubicacion);
-    // });
-    const { ubicacion } = pacientesD.find((x) => x.id === idPaciente);
-    return ubicacion;
-  }
+ app.use('/medicos', (req,res,next) => {
+   try{
+     if (req.method === 'GET'){
+       console.log(medicos);
+       res.sendData({ message: medicos });
+     }
+   }catch (e) {
+     res.status(418).send({ error: 'Las teteras no tienen medicos.' });
+     next(e);
+   }
+ });
 
- 
-  
+ app.use('/pacientes', (req,res,next) => {
+   try{
+     if (req.method === 'GET'){
+       console.log(pacientes);
+       res.sendData({ message: pacientes });
+     }
+   }catch (e) {
+     res.status(418).send({ error: 'Las teteras no tienen medicos.' });
+     next(e);
+   }
+ });
 
-  const calcularDistanciaMP = async (pacienteId, medicoId) => {
-    const ubicacionPaciente = obtenerUbicacionPaciente(pacienteId);
-    const ubicacionMedico = obtenerUbicacionMedico(medicoId);
-    const distanciaYDuracion = await distanceService.calcularDistancia(ubicacionPaciente, ubicacionMedico);
-    return distanciaYDuracion;
-  };
-
-app.use('/medicos'), async (req,res,next) => {
-  try{
-    if (req.method === 'GET'){
-      console.log(medicos);
-      res.sendData({ message: medicos });
+app.use('/medico/paciente/:pacienteId', async (req, res, next) => {
+  try {
+    if (req.method === 'GET') {
+      const listadoMedicos = await utilsService.medicosPorDistancia(req.params.pacienteId);
+      console.log('listado');
+      console.log(listadoMedicos);
+      console.log('muetro otro medico');
+      res.sendData({ message: listadoMedicos });
     }
-  }catch (e) {
-    res.status(418).send({ error: 'Las teteras no tienen medicos.' });
+  } catch (e) {
+    res.status(418).send({ error: 'el paciente no existe' });
     next(e);
   }
-}
-app.use('/pacientes'), async (req,res,next) => {
-  try{
-    if (req.method === 'GET'){
-      console.log(pacientes);
-      res.sendData({ message: pacientes });
-    }
-  }catch (e) {
-    res.status(418).send({ error: 'Las teteras no tienen medicos.' });
-    next(e);
-  }
-}
+});
 
   app.use('/medico/:medicoId/paciente/:pacienteId', async (req, res, next) => {
     try {
