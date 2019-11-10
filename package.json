@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "node ./test/tests.js"
+    "test": "mocha --timeout 10000"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,8 @@
   "homepage": "https://github.com/zanettilucas/tp2-proyecto-final",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "dotenv": "^6.2.0",
     "express": "^4.17.1",
     "google-distance-matrix": "^1.1.1",
@@ -34,6 +36,9 @@
   "devDependencies": {
     "eslint": "^6.5.1",
     "nodemon": "^1.18.10",
+    "mocha": "^6.2.2",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "sequelize-cli": "^5.5.1"

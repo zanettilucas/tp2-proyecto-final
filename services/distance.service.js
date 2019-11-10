@@ -28,19 +28,27 @@ const calcularDistancia = async (origin, destination) => {
 };
 
 const calcularDistanciaMP = async (pacienteId, medicoId) => {
-  const ubicacionPaciente = await obtenerUbicacion(pacienteId, pacientes);
-  const ubicacionMedico = await obtenerUbicacion(medicoId, medicos);
-  const distanciaYDuracion = await calcularDistancia(ubicacionPaciente, ubicacionMedico);
-  distanciaYDuracion.medicoId = medicoId;
-  return distanciaYDuracion;
+  try {
+    const ubicacionPaciente = await obtenerUbicacion(pacienteId, pacientes);
+    const ubicacionMedico = await obtenerUbicacion(medicoId, medicos);
+    const distanciaYDuracion = await calcularDistancia(ubicacionPaciente, ubicacionMedico);
+    distanciaYDuracion.medicoId = medicoId;
+    return distanciaYDuracion;
+  } catch (e) {
+    return 'Error obteniendo ubicación';
+  }
 };
 
 const medicosYDistancia = async (pacienteId) => {
-  const arrayPromisesDistancia = [];
-  medicos.forEach((medico) => {
-    arrayPromisesDistancia.push(calcularDistanciaMP(pacienteId, medico.id));
-  });
-  return Promise.all(arrayPromisesDistancia);
+  try {
+    const arrayPromisesDistancia = [];
+    medicos.forEach((medico) => {
+      arrayPromisesDistancia.push(calcularDistanciaMP(pacienteId, medico.id));
+    });
+    return Promise.all(arrayPromisesDistancia);
+  } catch (e) {
+    return 'Error obteniendo ubicación';
+  }
 };
 
 module.exports = {
