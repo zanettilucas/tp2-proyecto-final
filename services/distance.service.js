@@ -1,10 +1,13 @@
+const fs = require('fs');
 const distance = require('google-distance-matrix');
 
-// var origins = ['-34.609999, -58.429088'];
-// var destinations = ['-34.603651, -58.381678'];
+const medicos = JSON.parse(fs.readFileSync('./data/medicos.json'));
+const pacientes = JSON.parse(fs.readFileSync('./data/pacientes.json'));
+
+const obtenerUbicacion = async (id, array) => array.find((x) => x.id === id).ubicacion;
 
 /**
- * Enviador de mails
+ * calcula distancias.
  * @param {string} origin Origen a calcular
  * @param {string} destination Destino a calcular.
  * @returns {Promise<object>} Distancia y duracion.
@@ -13,22 +16,34 @@ const calcularDistancia = async (origin, destination) => {
   distance.key('AIzaSyDSDU_29QYkLeBel6eA_7qygQ7A8M8bayk');
   return new Promise((resolve, reject) => {
     distance.matrix([origin], [destination], (err, distances) => {
-      console.log('hola');
       if (err) {
-        return console.error(err);
+        return reject(new Error(`No se puede calcular distancia: ${err}`));
       }
       if (!distances) {
-        return console.error('no distances');
+        return reject(new Error('No hay distancias que calcular.'));
       }
-      console.log('distances');
-      console.log(distances);
-      console.log('distances.rows');
-      console.log(distances.rows);
-      console.log('distances.rows0');
-      console.log(distances.rows[0]);
-      return resolve(distances.rows[0].elements);
+      return resolve(...distances.rows[0].elements);
     });
   });
 };
 
-module.exports = { calcularDistancia };
+const calcularDistanciaMP = async (pacienteId, medicoId) => {
+  const ubicacionPaciente = await obtenerUbicacion(pacienteId, pacientes);
+  const ubicacionMedico = await obtenerUbicacion(medicoId, medicos);
+  const distanciaYDuracion = await calcularDistancia(ubicacionPaciente, ubicacionMedico);
+  distanciaYDuracion.medicoId = medicoId;
+  return distanciaYDuracion;
+};
+
+const medicosYDistancia = async (pacienteId) => {
+  const arrayPromisesDistancia = [];
+  medicos.forEach((medico) => {
+    arrayPromisesDistancia.push(calcularDistanciaMP(pacienteId, medico.id));
+  });
+  return Promise.all(arrayPromisesDistancia);
+};
+
+module.exports = {
+  calcularDistanciaMP,
+  medicosYDistancia,
+};

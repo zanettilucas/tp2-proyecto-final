@@ -1,6 +1,6 @@
 const request = require('http');
 const assert = require('assert');
-const describe = require('mocha');
+const describe = require('mocha/lib/interfaces/common');
 const app = require('../index');
 
 describe('GET /medico/:medicoId/paciente/:pacienteId', () => {
