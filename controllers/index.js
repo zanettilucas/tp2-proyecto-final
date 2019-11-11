@@ -54,6 +54,28 @@ const initializeRoutes = (app) => {
     }
   });
 
+  app.use('/especialidades', (req, res, next) => {
+    try {
+      if (req.method === 'GET') {
+        res.sendData({ message: especialidades });
+      }
+    } catch (e) {
+      res.status(418).send({ error: 'Las teteras no tienen especialidades.' });
+      next(e);
+    }
+  });
+
+  app.use('/turnos', (req, res, next) => {
+    try {
+      if (req.method === 'GET') {
+        res.sendData({ message: turnos });
+      }
+    } catch (e) {
+      res.status(418).send({ error: 'Las teteras no tienen turnos.' });
+      next(e);
+    }
+  });
+
   app.use('/medico/paciente/:pacienteId', async (req, res, next) => {
     try {
       if (req.method === 'GET') {
