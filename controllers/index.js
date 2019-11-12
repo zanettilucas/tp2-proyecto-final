@@ -1,4 +1,7 @@
 const fs = require('fs');
+const bodyParser = require('body-parser');
+const Joi = require('@hapi/joi');
+
 
 // Lectura data mock
 const rawdataMed = fs.readFileSync('./data/medicos.json');
@@ -32,16 +35,72 @@ const initializeRoutes = (app) => {
   });
 */
 
+
   app.use('/medicos', (req, res, next) => {
     try {
       if (req.method === 'GET') {
         res.sendData({ message: medicos });
+      } else if (req.method === 'POST') {
+        const nuevoMedico = req.body;
+        // try {
+        if (esMedicoInvalido(nuevoMedico)) {
+          // throw { status: 402, descripcion: 'el medico posee un formato json invalido o faltan datos' };
+          console.log('datos incorrectos');
+        }
+        const medicoBuscado = getMedicoById(nuevoMedico.id);
+        if (medicoBuscado) {
+          // throw { status: 402, descripcion: 'ya existe un medico con ese id' };
+          console.log('el medico ya existe');
+        } else {
+          agregarMedico(nuevoMedico);
+          res.status(201).json(nuevoMedico);
+        }
+        // } catch (err) {
+        //  res.status(201).json(err);
+        // }
       }
     } catch (e) {
       res.status(418).send({ error: 'Las teteras no tienen medicos.' });
       next(e);
     }
   });
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.json());
+
+
+  function getMedicoById(id) {
+    return medicos.find((m) => m.id === id);
+  }
+
+  function esMedicoInvalido(medico) {
+    const schema = Joi.object({
+      id: Joi.number().integer().min(0).required(),
+      nombre: Joi.string().alphanum().min(1).required(),
+      apellido: Joi.string().alphanum().min(1).required(),
+      especialidad: Joi.string().alphanum().min(1).required(),
+      ubicacion: Joi.string().alphanum().min(1).required(),
+    });
+    schema.validate(medico);
+    // return error;
+  }
+
+  function agregarMedico(medico) {
+    medicos.push(medico);
+    console.log(medicos);
+    fs.writeFileSync(('./data/medicos.json'), JSON.stringify(medicos));
+  }
+
+
+  // app.use('/medicos', (req, res, next) => {
+  //   try {
+  //     if (req.method === 'GET') {
+  //       res.sendData({ message: medicos });
+  //     }
+  //   } catch (e) {
+  //     res.status(418).send({ error: 'Las teteras no tienen medicos.' });
+  //     next(e);
+  //   }
+  // });
 
   app.use('/pacientes', (req, res, next) => {
     try {

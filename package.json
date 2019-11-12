@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/zanettilucas/tp2-proyecto-final",
   "dependencies": {
+    "@hapi/joi": "^16.1.7",
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
