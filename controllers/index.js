@@ -34,6 +34,14 @@ const initializeRoutes = (app) => {
     }
   });
 */
+  function buscarMedico(idMedico) {
+    return medicos.findIndex((obj) => obj.id === idMedico);
+  }
+
+  function eliminarMedico(idMedico) {
+    delete medicos[(buscarMedico(idMedico))];
+    fs.writeFileSync(('./data/medicos.json'), JSON.stringify(medicos));
+  }
 
 
   app.use('/medicos', (req, res, next) => {
@@ -58,6 +66,12 @@ const initializeRoutes = (app) => {
         // } catch (err) {
         //  res.status(201).json(err);
         // }
+      } else if (req.method === 'DELETE') {
+        const medico = req.body;
+        const medicoBuscado = getMedicoById(medico.id);
+        if (medicoBuscado) {
+          eliminarMedico(medico.id);
+        }
       }
     } catch (e) {
       res.status(418).send({ error: 'Las teteras no tienen medicos.' });
