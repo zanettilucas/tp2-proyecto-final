@@ -39,7 +39,10 @@ const initializeRoutes = (app) => {
   }
 
   function eliminarMedico(idMedico) {
-    delete medicos[(buscarMedico(idMedico))];
+    const index = buscarMedico(idMedico);
+    if (index !== undefined) {
+      medicos.splice(index, 1);
+    }
     fs.writeFileSync(('./data/medicos.json'), JSON.stringify(medicos));
   }
 
