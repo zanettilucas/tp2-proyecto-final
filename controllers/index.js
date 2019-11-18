@@ -58,13 +58,14 @@ const initializeRoutes = (app) => {
     try {
       if (req.method === 'GET') {
         let listadoMedicos = await distanceService.medicosYDistancia(parseInt(req.params.pacienteId, 10));
-        if (listadoMedicos[0] !== 'Error obteniendo ubicación') {
-          listadoMedicos = listadoMedicos.sort((d1, d2) => d1.distance.value - d2.distance.value);
+        if (listadoMedicos[0] === 'Error obteniendo ubicación') {
+          throw new Error(listadoMedicos[0]);
         }
+        listadoMedicos = listadoMedicos.sort((d1, d2) => d1.distance.value - d2.distance.value);
         res.sendData({ message: listadoMedicos });
       }
     } catch (e) {
-      res.status(418).send({ error: 'el paciente no existe' });
+      res.status(404).send({ error: 'el paciente no existe' });
       next(e);
     }
   });

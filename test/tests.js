@@ -22,7 +22,7 @@ describe('/GET medico/paciente/:idPaciente caso triste', () => {
     chai.request(server)
       .get('/medico/paciente/300')
       .end((err, res) => {
-        res.should.have.status(418);
+        res.should.have.status(404);
         done();
       });
   });
