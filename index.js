@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const env = require('dotenv').load();
-const distance = require('google-distance-matrix');
 const models = require('./models');
 const controllers = require('./controllers');
 

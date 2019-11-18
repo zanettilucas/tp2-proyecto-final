@@ -31,7 +31,7 @@ const config = {
     from: process.env.EMAIL_FROM || 'tp2.centro.medico.tp2@gmail.com',
     smtp: {
       host: process.env.EMAIL_SMTP_HOST || 'smtp.gmail.com',
-      port: parseParamInt(process.env.EMAIL_SMTP_PORT, 465),
+      port: parseParamInt(process.env.EMAIL_SMTP_PORT, 587),
       secure: parseParamBoolean(process.env.EMAIL_SMTP_SECURE, true),
       auth: {
         user: process.env.EMAIL_SMTP_AUTH_USER || 'tp2.centro.medico.tp2@gmail.com',
