@@ -1,6 +1,5 @@
 const fs = require('fs');
 const bodyParser = require('body-parser');
-const Joi = require('@hapi/joi');
 
 
 // Lectura data mock
@@ -18,6 +17,8 @@ const initializeRoutes = (app) => {
   app.use('/status', (req, res) => {
     res.sendData({ message: "I'm alive and well. Thank you." });
   });
+
+
   /*  app.use('/confirmar-turno', async (req, res, next) => {
     try {
       await mailerService.sendConfirmOrder({
@@ -34,6 +35,7 @@ const initializeRoutes = (app) => {
     }
   });
 */
+
   function buscarMedico(idMedico) {
     return medicos.findIndex((obj) => obj.id === idMedico);
   }
@@ -51,36 +53,40 @@ const initializeRoutes = (app) => {
     try {
       if (req.method === 'GET') {
         res.sendData({ message: medicos });
-      } else if (req.method === 'POST') {
-        const nuevoMedico = req.body;
-        // try {
-        if (esMedicoInvalido(nuevoMedico)) {
-          // throw { status: 402, descripcion: 'el medico posee un formato json invalido o faltan datos' };
-          console.log('datos incorrectos');
-        }
-        const medicoBuscado = getMedicoById(nuevoMedico.id);
-        if (medicoBuscado) {
-          // throw { status: 402, descripcion: 'ya existe un medico con ese id' };
-          console.log('el medico ya existe');
-        } else {
-          agregarMedico(nuevoMedico);
-          res.status(201).json(nuevoMedico);
-        }
-        // } catch (err) {
-        //  res.status(201).json(err);
-        // }
-      } else if (req.method === 'DELETE') {
-        const medico = req.body;
-        const medicoBuscado = getMedicoById(medico.id);
-        if (medicoBuscado) {
-          eliminarMedico(medico.id);
-        }
       }
     } catch (e) {
       res.status(418).send({ error: 'Las teteras no tienen medicos.' });
       next(e);
     }
+    try {
+      if (req.method === 'POST') {
+        const nuevoMedico = req.body;
+        const medicoBuscado = getMedicoById(nuevoMedico.id);
+        if (medicoBuscado) {
+          // throw { status: 402, descripcion: 'ya existe un medico con ese id' };
+          res.status(400).send({ error: 'el medico ya existe.' });
+        } else {
+          agregarMedico(nuevoMedico);
+          res.status(201).json(nuevoMedico);
+        }
+      }
+    } catch (e) {
+      res.status(418).send({ error: 'no se pudo agregar el medico.' });
+      next(e);
+    }
+    try {
+      if (req.method === 'DELETE') {
+        const medico = req.params.id;
+        const medicoBuscado = getMedicoById(medico);
+        if (medicoBuscado) {
+          eliminarMedico(medico);
+        }
+      }
+    } catch (e) {
+      res.status(418).send({ error: 'no se pudo eliminar el medico.' });
+    }
   });
+
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
 
@@ -88,23 +94,16 @@ const initializeRoutes = (app) => {
   function getMedicoById(id) {
     return medicos.find((m) => m.id === id);
   }
-
-  function esMedicoInvalido(medico) {
-    const schema = Joi.object({
-      id: Joi.number().integer().min(0).required(),
-      nombre: Joi.string().alphanum().min(1).required(),
-      apellido: Joi.string().alphanum().min(1).required(),
-      especialidad: Joi.string().alphanum().min(1).required(),
-      ubicacion: Joi.string().alphanum().min(1).required(),
-    });
-    schema.validate(medico);
-    // return error;
+  function getPacienteById(id) {
+    return pacientes.find((p) => p.id === id);
   }
-
   function agregarMedico(medico) {
     medicos.push(medico);
-    console.log(medicos);
     fs.writeFileSync(('./data/medicos.json'), JSON.stringify(medicos));
+  }
+  function agregarPaciente(paciente) {
+    pacientes.push(paciente);
+    fs.writeFileSync(('./data/pacientes.json'), JSON.stringify(pacientes));
   }
 
 
@@ -126,6 +125,33 @@ const initializeRoutes = (app) => {
       }
     } catch (e) {
       res.status(418).send({ error: 'Las teteras no tienen pacientes.' });
+      next(e);
+    }
+    try {
+      if (req.method === 'POST') {
+        const nuevoPaciente = req.body;
+        const pacienteBuscado = getPacienteById(nuevoPaciente.id);
+        if (pacienteBuscado) {
+          res.status(400).send({ error: 'el paciente ya existe.' });
+        } else {
+          agregarPaciente(nuevoPaciente);
+          res.status(201).json(nuevoPaciente);
+        }
+      }
+    } catch (e) {
+      res.status(418).send({ error: 'no se pudo agregar el paciente.' });
+      next(e);
+    }
+    try {
+      if (req.method === 'DELETE') {
+        const medico = req.params.id;
+        const medicoBuscado = getMedicoById(medico);
+        if (medicoBuscado) {
+          eliminarMedico(medico);
+        }
+      }
+    } catch (e) {
+      res.status(418).send({ error: 'no se pudo eliminar el medico.' });
       next(e);
     }
   });
