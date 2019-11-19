@@ -39,10 +39,10 @@ router.post('/', (req, res, next) => {
     if (usuarioService.agregarUsuario(nuevoPaciente, pacientesArchivo)) {
       res.status(201).json(nuevoPaciente);
     } else {
-      res.status(400).send({ error: 'el paciente ya existe.' });
+      res.status(400).send({ error: 'El paciente ya existe.' });
     }
   } catch (e) {
-    res.status(418).send({ error: 'no se pudo agregar el paciente.' });
+    res.status(418).send({ error: 'No se pudo agregar el paciente.' });
     next(e);
   }
 });
@@ -52,10 +52,10 @@ router.delete('/:id', (req, res, next) => {
     if (usuarioService.eliminarUsuario(req.params.id, pacientesArchivo)) {
       res.status(200).json('Paciente Eliminado');
     } else {
-      res.status(400).send({ error: 'el paciente ya existe.' });
+      res.status(404).send({ error: 'Paciente no encontrado.' });
     }
   } catch (e) {
-    res.status(418).send({ error: 'no se pudo eliminar el paciente.' });
+    res.status(418).send({ error: 'No se pudo eliminar el paciente.' });
     next(e);
   }
 });
@@ -77,10 +77,10 @@ router.post('/turno', (req, res, next) => {
       });
       res.status(201).json(nuevoTurno);
     } else {
-      res.status(418).send({ error: 'no hay turno disponible con este medico para el día y hora seleccionado' });
+      res.status(418).send({ error: 'No hay turno disponible con este medico para el día y hora seleccionado' });
     }
   } catch (e) {
-    res.status(418).send({ error: 'no se pudo agregar el turno.' });
+    res.status(418).send({ error: 'No se pudo agregar el turno' });
     next(e);
   }
 });

@@ -6,8 +6,8 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('/GET medicos/paciente/:pacienteId caso feliz', () => {
-  it('medicos más cercanos ordenados del paciente', (done) => {
+describe('/GET medicos/paciente/:pacienteId Ok', () => {
+  it('Medicos más cercanos ordenados del paciente', (done) => {
     chai.request(server)
       .get('/medicos/paciente/1')
       .end((err, res) => {
@@ -17,7 +17,7 @@ describe('/GET medicos/paciente/:pacienteId caso feliz', () => {
   });
 });
 
-describe('/GET medicos/paciente/:pacienteId caso triste', () => {
+describe('/GET medicos/paciente/:pacienteId Fail', () => {
   it('Devuelve error', (done) => {
     chai.request(server)
       .get('/medicos/paciente/300')
@@ -28,8 +28,8 @@ describe('/GET medicos/paciente/:pacienteId caso triste', () => {
   });
 });
 
-describe('/POST pacientes/turno caso feliz', () => {
-  it('turno agregado', (done) => {
+describe('/POST pacientes/turno Ok', () => {
+  it('Turno agregado', (done) => {
     chai.request(server)
       .post('/pacientes/turno')
       .send({
@@ -44,7 +44,7 @@ describe('/POST pacientes/turno caso feliz', () => {
   });
 });
 
-describe('/POST pacientes/turno caso triste', () => {
+describe('/POST pacientes/turno Fail', () => {
   it('Devuelve error', (done) => {
     chai.request(server)
       .post('/pacientes/turno')
@@ -55,6 +55,23 @@ describe('/POST pacientes/turno caso triste', () => {
         console.log(res.body);
         res.should.have.status(418);
         // expect(res).to.have.status(200);
+        done();
+      });
+  });
+});
+
+
+describe('/DELETE pacientes/:id Fail', () => {
+  it('Buscar paciente que no existe por id para eliminar', (done) => {
+    chai.request(server)
+      .delete('/pacientes/:id')
+      .send({
+        id: 1,
+      })
+      .end((err, res) => {
+        console.log(res.body);
+        res.should.have.status(404);
+        
         done();
       });
   });

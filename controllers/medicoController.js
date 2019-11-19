@@ -47,10 +47,10 @@ router.post('/', (req, res, next) => {
     if (usuarioService.agregarUsuario(nuevoMedico, medicosArchivo)) {
       res.status(201).json(nuevoMedico);
     } else {
-      res.status(400).send({ error: 'el medico ya existe.' });
+      res.status(400).send({ error: 'El medico ya existe.' });
     }
   } catch (e) {
-    res.status(418).send({ error: 'no se pudo agregar el medico.' });
+    res.status(418).send({ error: 'No se pudo agregar el medico.' });
     next(e);
   }
 });
@@ -77,7 +77,7 @@ router.get('/paciente/:pacienteId', async (req, res, next) => {
     listadoMedicos = listadoMedicos.sort((d1, d2) => d1.distance.value - d2.distance.value);
     res.sendData({ message: listadoMedicos });
   } catch (e) {
-    res.status(404).send({ error: 'el paciente no existe' });
+    res.status(404).send({ error: 'El paciente no existe' });
     next(e);
   }
 });
