@@ -64,6 +64,12 @@ router.post('/turno', (req, res, next) => {
   try {
     const nuevoTurno = req.body;
     const turnos = JSON.parse(fs.readFileSync('./data/turnos.json'));
+    if (!usuarioService.getUsuario(nuevoTurno.medicoId, './data/medicos.json')) {
+      return res.status(418).send({ error: 'El id del medico no existe.' });
+    }
+    if (!usuarioService.getUsuario(nuevoTurno.pacienteId, './data/pacientes.json')) {
+      return res.status(418).send({ error: 'El id del paciente no existe.' });
+    }
     if (turnoService.validarDisponibilidad(nuevoTurno, turnos)) {
       turnos.push(nuevoTurno);
       fs.writeFileSync('./data/turnos.json', JSON.stringify(turnos));
