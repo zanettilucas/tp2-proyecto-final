@@ -4,6 +4,7 @@ const pacientesArchivo = './data/pacientes.json';
 const fs = require('fs');
 const usuarioService = require('../services/usuario.service');
 const mailerService = require('../services/mailer.service.js');
+const turnoService = require('../services/turno.service.js');
 
 const router = Router();
 
@@ -63,20 +64,23 @@ router.post('/turno', (req, res, next) => {
   try {
     const nuevoTurno = req.body;
     const turnos = JSON.parse(fs.readFileSync('./data/turnos.json'));
-    turnos.push(nuevoTurno);
-    fs.writeFileSync('./data/turnos.json', JSON.stringify(turnos));
-    // después traer todo.
-    mailerService.sendConfirmOrder({
-      paciente: { email: 'zanettilucas93@gmail.com' },
-      medico: { email: 'zanettilucas93@gmail.com' },
-      codigo: 'turno sarlanga',
-      fecha: '10/02/1993',
-      horario: '11 am',
-    });
-
-    res.status(201).json(nuevoTurno);
+    if (turnoService.validarDisponibilidad(nuevoTurno, turnos)) {
+      turnos.push(nuevoTurno);
+      fs.writeFileSync('./data/turnos.json', JSON.stringify(turnos));
+      // después traer todo.
+      mailerService.sendConfirmOrder({
+        paciente: { email: 'zanettilucas93@gmail.com' },
+        medico: { email: 'zanettilucas93@gmail.com' },
+        codigo: 'turno sarlanga',
+        fecha: '10/02/1993',
+        horario: '11 am',
+      });
+      res.status(201).json(nuevoTurno);
+    } else {
+      res.status(418).send({ error: 'no hay turno disponible con este medico para el día y hora seleccionado' });
+    }
   } catch (e) {
-    res.status(418).send({ error: 'no se pudo agregar el paciente.' });
+    res.status(418).send({ error: 'no se pudo agregar el turno.' });
     next(e);
   }
 });
