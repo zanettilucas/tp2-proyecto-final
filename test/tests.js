@@ -28,6 +28,17 @@ describe('/GET medicos/paciente/:pacienteId Fail', () => {
   });
 });
 
+describe('/GET Especialidades Ok', () => {
+  it('Devuelve especialidades', (done) => {
+    chai.request(server)
+      .get('/medicos/especialidades')
+      .end((err, res) => {
+        res.should.have.status(200);
+        done();
+      });
+  });
+});
+
 describe('/POST pacientes/turno Ok', () => {
   it('Turno agregado', (done) => {
     chai.request(server)
