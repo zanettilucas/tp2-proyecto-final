@@ -1,8 +1,8 @@
-const { Router } = require('express');
+/* const { Router } = require('express');
 
 const medicosArchivo = './data/medicos.json';
 const fs = require('fs');
-const usuarioService = require('../services/usuario.service');
+const usuarioService = require('../helper/dao.helper');
 const distanceService = require('../services/distance.service');
 
 const router = Router();
@@ -92,5 +92,48 @@ router.get('/:medicoId/paciente/:pacienteId', async (req, res, next) => {
   }
 });
 
+
+module.exports = router;
+*/
+const { Router } = require('express');
+const medicoService = require('../services/medico.service');
+
+const router = Router();
+
+router.get('/', (req, res, next) => {
+  try {
+    res.sendData(medicoService.getAll());
+  } catch (e) {
+    res.status(418).send(e);
+    next(e);
+  }
+});
+
+router.get('/:id', (req, res, next) => {
+  try {
+    res.sendData(medicoService.get(req.params.id));
+  } catch (e) {
+    res.status(404).send(e);
+    next(e);
+  }
+});
+
+router.post('/', (req, res, next) => {
+  try {
+    res.sendData(medicoService.agregar(req.body));
+  } catch (e) {
+    res.status(500).send(e);
+    next(e);
+  }
+});
+
+router.delete('/:id', (req, res, next) => {
+  try {
+    res.sendData(medicoService.eliminar(req.params.id));
+  } catch (e) {
+    res.status(404).send(e);
+    next(e);
+  }
+});
 
 module.exports = router;

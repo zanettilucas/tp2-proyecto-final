@@ -2,7 +2,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const env = require('dotenv').load();
 const models = require('./models');
-const controllers = require('./controllers');
+const router = require('./router');
 
 
 const app = express();
@@ -33,8 +33,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// --- Controllers / Routes
-controllers.initializeRoutes(app);
+// --- Routes
+router.initializeRoutes(app);
 
 // --- Error handling
 // catch 404 and forward to error handler

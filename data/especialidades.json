@@ -1,18 +1,1 @@
-[
-    {
-        "id" : 1,
-        "nombreEsp": "Dentista"
-    },
-    {
-        "id" : 2,
-        "nombreEsp": "Pediatra"
-    },
-    {
-        "id" : 3,
-        "nombreEsp": "Clinico"
-    },
-    {
-        "id" : 4,
-        "nombreEsp": "Shrek"
-    }
-]
+[{"id":1,"nombre":"Dentista"},{"id":2,"nombre":"Pediatra"},{"id":3,"nombre":"Clinico"},{"id":4,"nombre":"Shrek"}]

@@ -1,8 +1,8 @@
-const { Router } = require('express');
+/* const { Router } = require('express');
 
 const pacientesArchivo = './data/pacientes.json';
 const fs = require('fs');
-const usuarioService = require('../services/usuario.service');
+const usuarioService = require('../helper/dao.helper');
 const mailerService = require('../services/mailer.service.js');
 const turnoService = require('../services/turno.service.js');
 
@@ -87,6 +87,49 @@ router.post('/turno', (req, res, next) => {
     }
   } catch (e) {
     res.status(418).send({ error: 'No se pudo agregar el turno' });
+    next(e);
+  }
+});
+
+module.exports = router;
+*/
+const { Router } = require('express');
+const pacienteService = require('../services/paciente.service');
+
+const router = Router();
+
+router.get('/', (req, res, next) => {
+  try {
+    res.sendData(pacienteService.getAll());
+  } catch (e) {
+    res.status(418).send(e);
+    next(e);
+  }
+});
+
+router.get('/:id', (req, res, next) => {
+  try {
+    res.sendData(pacienteService.get(req.params.id));
+  } catch (e) {
+    res.status(404).send(e);
+    next(e);
+  }
+});
+
+router.post('/', (req, res, next) => {
+  try {
+    res.sendData(pacienteService.agregar(req.body));
+  } catch (e) {
+    res.status(500).send(e);
+    next(e);
+  }
+});
+
+router.delete('/:id', (req, res, next) => {
+  try {
+    res.sendData(pacienteService.eliminar(req.params.id));
+  } catch (e) {
+    res.status(404).send(e);
     next(e);
   }
 });
