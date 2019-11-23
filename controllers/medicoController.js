@@ -68,9 +68,9 @@ router.delete('/:id', (req, res, next) => {
   }
 });
 
-router.get('/paciente/:pacienteId', async (req, res, next) => {
+router.get('/distancia/paciente', async (req, res, next) => {
   try {
-    let listadoMedicos = await distanceService.medicosYDistancia(parseInt(req.params.pacienteId, 10));
+    let listadoMedicos = await distanceService.medicosYDistancia(parseInt(req.query.pacienteId, 10));
     if (listadoMedicos[0] === 'Error obteniendo ubicación') {
       throw new Error(listadoMedicos[0]);
     }

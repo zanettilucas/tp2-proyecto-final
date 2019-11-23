@@ -1,15 +1,17 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../index');
+const usuario = require('../services/usuario.service');
 
 const should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('/GET medicos/paciente/:pacienteId Ok', () => {
+describe('/GET medicos/distancia/paciente Ok', () => {
   it('Medicos más cercanos ordenados del paciente', (done) => {
     chai.request(server)
-      .get('/medicos/paciente/1')
+      .get('/medicos/distancia/paciente')
+      .query({ pacienteId: 2 })
       .end((err, res) => {
         res.should.have.status(200);
         done();
@@ -17,10 +19,11 @@ describe('/GET medicos/paciente/:pacienteId Ok', () => {
   });
 });
 
-describe('/GET medicos/paciente/:pacienteId Fail', () => {
+describe('/GET medicos/distancia/paciente Fail', () => {
   it('Devuelve error', (done) => {
     chai.request(server)
-      .get('/medicos/paciente/300')
+      .get('/medicos/distancia/paciente')
+      .query({ pacienteId: 300 })
       .end((err, res) => {
         res.should.have.status(404);
         done();
@@ -49,7 +52,6 @@ describe('/POST pacientes/turno Ok', () => {
       .end((err, res) => {
         console.log(res.body);
         res.should.have.status(201);
-        // expect(res).to.have.status(200);
         done();
       });
   });
@@ -66,7 +68,6 @@ describe('/POST pacientes/turno Fail medico ocupado', () => {
       .end((err, res) => {
         console.log(res.body);
         res.should.have.status(418);
-        // expect(res).to.have.status(200);
         done();
       });
   });
@@ -82,7 +83,6 @@ describe('/POST pacientes/turno Fail medico inexistente', () => {
       .end((err, res) => {
         console.log(res.body);
         res.should.have.status(418);
-        // expect(res).to.have.status(200);
         done();
       });
   });
@@ -98,23 +98,70 @@ describe('/POST pacientes/turno Fail paciente inexistente', () => {
       .end((err, res) => {
         console.log(res.body);
         res.should.have.status(418);
-        // expect(res).to.have.status(200);
         done();
       });
   });
 });
 
-describe('/DELETE pacientes/:id Fail', () => {
-  it('Buscar paciente que no existe por id para eliminar', (done) => {
+describe('/POST pacientes Ok', () => {
+  it('paciente agregado', (done) => {
     chai.request(server)
-      .delete('/pacientes/:id')
+      .post('/pacientes')
       .send({
-        id: 1,
+        dni: 36949535,
+        id: 36949535,
+        nombre: 'Gonzalo',
+        apellido: 'Merlo',
+        ubicacion: '-34.606294, -58.4282253',
       })
       .end((err, res) => {
         console.log(res.body);
-        res.should.have.status(404);
+        res.should.have.status(201);
+        done();
+      });
+  });
+});
 
+describe('/POST pacientes fail', () => {
+  it('el paciente ya existe', (done) => {
+    chai.request(server)
+      .post('/pacientes')
+      .send({
+        dni: 1,
+        id: 1,
+        nombre: 'Mariano',
+        apellido: 'Aquino',
+        ubicacion: '-34.606294, -58.4282253',
+      })
+      .end((err, res) => {
+        console.log(res.body);
+        res.should.have.status(400);
+        done();
+      });
+  });
+});
+
+describe('/DELETE pacientes/:id Ok', () => {
+  it('Paciente eliminado', (done) => {
+    const id = 36949535;
+    chai.request(server)
+      .delete(`/pacientes/${id}`)
+      .end((err, res) => {
+        console.log(res.body);
+        res.should.have.status(200);
+        done();
+      });
+  });
+});
+
+describe('/DELETE pacientes/:id fail', () => {
+  it('el paciente no existe', (done) => {
+    const id = 9999999;
+    chai.request(server)
+      .delete(`/pacientes/${id}`)
+      .end((err, res) => {
+        console.log(res.body);
+        res.should.have.status(404);
         done();
       });
   });
