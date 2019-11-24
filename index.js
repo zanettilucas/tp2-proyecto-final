@@ -28,6 +28,7 @@ app.use((req, res, next) => {
       status: 200,
       data,
     };
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.send(response);
   };
   next();
