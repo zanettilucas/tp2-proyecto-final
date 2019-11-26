@@ -11,7 +11,7 @@ const agregar = (medicoNuevo) => medico.agregarMedico(medicoNuevo);
 
 const eliminar = (id) => medico.eliminarMedico(id);
 
-const listadoPorEspecialidad = (filtros) => {
+const listadoPorEspecialidad = async (filtros) => {
   if (especialidadService.validar(filtros.especialidad)) {
     const medicos = medico.getForEspecialidad(filtros.especialidad);
     if (filtros.limit) {

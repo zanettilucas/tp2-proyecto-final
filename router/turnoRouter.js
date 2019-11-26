@@ -25,7 +25,7 @@ router.post('/', async (req, res, next) => {
   try {
     res.sendData(await turnoService.agregar(req.body));
   } catch (e) {
-    res.status(500).send(e);
+    res.status(500).send('Envie un turno valido');
     next(e);
   }
 });

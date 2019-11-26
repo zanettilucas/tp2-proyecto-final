@@ -1,36 +1,96 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../index');
-const usuario = require('../services/usuario.service');
 
-const should = chai.should();
+const { expect } = chai;
+
 
 chai.use(chaiHttp);
 
-describe('/GET medicos/distancia/paciente Ok', () => {
-  it('Medicos más cercanos ordenados del paciente', (done) => {
+describe('/GET medicos?especialidad=Clinico&limit=2', () => {
+  it('Medicos filtrados por especialidad ', (done) => {
     chai.request(server)
-      .get('/medicos/distancia/paciente')
-      .query({ pacienteId: 2 })
+      .get('/medicos?especialidad=Clinico&limit=2')
       .end((err, res) => {
-        res.should.have.status(200);
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('data').to.be.lengthOf(2);
         done();
       });
   });
 });
 
-describe('/GET medicos/distancia/paciente Fail', () => {
+describe('/GET /medicos?especialidad=pruebamala&limit=2', () => {
   it('Devuelve error', (done) => {
     chai.request(server)
-      .get('/medicos/distancia/paciente')
-      .query({ pacienteId: 300 })
+      .get('/medicos?especialidad=pruebamala&limit=2')
       .end((err, res) => {
-        res.should.have.status(404);
+        expect(res).to.have.status(404);
+        expect(res.body).to.have.property('data').to.be.equal('Especialidad no valida');
         done();
       });
   });
 });
 
+describe('/GET /medicos?pacienteId=1&distanceMax=1000', () => {
+  it('Medicos por distancia desde un paciente.', (done) => {
+    chai.request(server)
+      .get('/medicos?pacienteId=1&distanceMax=1000')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('data').to.be.lengthOf(1);
+        done();
+      });
+  });
+});
+
+describe('/GET /medicos?pacienteId=9999&distanceMax=1000', () => {
+  it('Devuelve error', (done) => {
+    chai.request(server)
+      .get('/medicos?pacienteId=9999&distanceMax=1000')
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body).to.have.property('data').to.be.equal('Paciente no encontrado');
+        done();
+      });
+  });
+});
+
+describe('/GET /medicos', () => {
+  it('Devuelve todos los medicos.', (done) => {
+    chai.request(server)
+      .get('/medicos')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+});
+
+describe('/GET /pacientes/1/sugerencias?especialidad=Clinico&limit=1', () => {
+  it('Sugerencias de medico más cercano para paciente según especialidad.', (done) => {
+    chai.request(server)
+      .get('/pacientes/1/sugerencias?especialidad=Clinico&limit=1')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('data').to.be.lengthOf(1);
+        done();
+      });
+  });
+});
+
+describe('/GET /pacientes/1/sugerencias?especialidad=calesita&limit=1', () => {
+  it('Devuelve error', (done) => {
+    chai.request(server)
+      .get('/pacientes/1/sugerencias?especialidad=calesita&limit=1')
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body).to.have.property('data').to.be.equal('especialidad no valida');
+        done();
+      });
+  });
+});
+
+/*
 describe('/GET Especialidades Ok', () => {
   it('Devuelve especialidades', (done) => {
     chai.request(server)
@@ -166,3 +226,4 @@ describe('/DELETE pacientes/:id fail', () => {
       });
   });
 });
+*/

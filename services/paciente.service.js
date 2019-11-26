@@ -1,6 +1,7 @@
 const pacientes = require('../dao/paciente.dao');
-const medicoService = require('./medico.service');
 const distanceService = require('./distance.service');
+const medicoDao = require('../dao/medico.dao');
+const especialidadService = require('./especialidad.service');
 
 const getAll = () => pacientes.getAll();
 
@@ -12,9 +13,12 @@ const eliminar = (id) => pacientes.eliminarPaciente(id);
 
 const getMedicosYDistanciaPorEspecialidad = async (idPaciente, filtrosMedico) => {
   const paciente = get(idPaciente);
-  const medicos = medicoService.listadoPorEspecialidad({ especialidad: filtrosMedico.especialidad });
+  let medicos;
+  if (especialidadService.validar(filtrosMedico.especialidad)) {
+    medicos = await medicoDao.getForEspecialidad(filtrosMedico.especialidad);
+  }
   const medicosYDistanciaPromise = [];
-  if (medicos !== 'especialidad no valida') {
+  if (medicos !== undefined) {
     medicos.forEach((medico) => {
       const distancePromise = distanceService.calcularDistancia(paciente.ubicacion, medico.ubicacion);
       medicosYDistanciaPromise.push(distancePromise.then((distance) => ({ distance, medico })));
@@ -27,7 +31,7 @@ const getMedicosYDistanciaPorEspecialidad = async (idPaciente, filtrosMedico) =>
       return distancias;
     });
   }
-  return medicos;
+  return 'especialidad no valida';
 };
 
 module.exports = {
