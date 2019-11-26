@@ -19,7 +19,7 @@ const listadoPorEspecialidad = (filtros) => {
     }
     return medicos;
   }
-  return 'especialidad no valida';
+  return 'Especialidad no valida';
 };
 
 const getDistanciaMedicosPorPaciente = async (filtros) => {

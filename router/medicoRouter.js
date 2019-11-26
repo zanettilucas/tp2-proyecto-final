@@ -104,7 +104,7 @@ router.get('/', async (req, res, next) => {
   try {
     if (req.query.especialidad) {
       const medicos = medicoService.listadoPorEspecialidad(req.query);
-      if (medicos !== 'especialidad no valida') {
+      if (medicos !== 'Especialidad no valida') {
         res.sendData(medicos);
       }
       res.status(404).send(medicos);
