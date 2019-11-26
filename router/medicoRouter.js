@@ -100,11 +100,18 @@ const medicoService = require('../services/medico.service');
 
 const router = Router();
 
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     if (req.query.especialidad) {
       const medicos = medicoService.listadoPorEspecialidad(req.query);
       if (medicos !== 'especialidad no valida') {
+        res.sendData(medicos);
+      }
+      res.status(404).send(medicos);
+    }
+    if (req.query.pacienteId) {
+      const medicos = await medicoService.getDistanciaMedicosPorPaciente(req.query);
+      if (medicos !== 'Paciente no encontrado') {
         res.sendData(medicos);
       }
       res.status(404).send(medicos);
