@@ -21,9 +21,9 @@ router.get('/:id', (req, res, next) => {
   }
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
-    res.sendData(turnoService.agregar(req.body));
+    res.sendData(await turnoService.agregar(req.body));
   } catch (e) {
     res.status(500).send(e);
     next(e);

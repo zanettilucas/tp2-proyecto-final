@@ -1,20 +1,26 @@
 const turnos = require('../dao/turno.dao');
+const mailerService = require('./mailer.service');
 
-const buscarTurno = (turno, array) => array.findIndex((medico) => medico.medicoId === turno.medicoId && medico.dia === turno.dia && medico.hora === turno.hora);
+const getAll = () => turnos.getAll();
 
-const validarDisponibilidad = (turno, array) => {
-  if (buscarTurno(turno, array) === -1) {
+const buscarTurno = (turno) => getAll().findIndex((turnoExistente) => turnoExistente.medicoId === turno.medicoId && turnoExistente.fecha === turno.fecha && turnoExistente.pacienteId === turno.pacienteId && turnoExistente.horario === turno.horario);
+
+const validarDisponibilidad = (turno) => {
+  if (buscarTurno(turno) === -1) {
     return true;
   }
   return false;
 };
 
-
-const getAll = () => turnos.getAll();
-
 const get = (id) => turnos.get(id);
 
-const agregar = (turnoNuevo) => turnos.agregarTurno(turnoNuevo);
+const agregar = async (turnoNuevo) => {
+  if (validarDisponibilidad(turnoNuevo)) {
+    // await mailerService.sendConfirmOrder(turnoNuevo);
+    return turnos.agregarTurno(turnoNuevo);
+  }
+  return 'Ya existe el turno';
+};
 
 const eliminar = (id) => turnos.eliminarTurno(id);
 

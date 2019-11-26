@@ -1,5 +1,7 @@
 const nodemailer = require('nodemailer');
 const config = require('../config/config');
+const medicoService = require('./medico.service');
+const pacienteService = require('./paciente.service');
 
 // initialize the email transporter
 const transporterConfig = config.email.smtp;
@@ -51,8 +53,8 @@ const sendEmailFromTemplate = (recipient, ccRecipient, subject, template, templa
 const sendConfirmOrder = (turno) => {
   const mail = sendEmail(
     `Confirmación turno ${turno.codigo}`,
-    turno.paciente.email,
-    turno.medico.email,
+    pacienteService.get(turno.pacienteId).mail,
+    medicoService.get(turno.medicoId).mail,
     `Se confirma el turno el día ${turno.fecha} en el horario ${turno.horario}.
      No responda este email, pues es una casilla no monitoreada. Muy bien.`,
   );

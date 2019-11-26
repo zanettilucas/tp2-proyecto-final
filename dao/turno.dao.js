@@ -19,13 +19,13 @@ const getAll = () => {
 };
 
 const agregarTurno = (turno) => {
-  if (Number.isInteger(turno.id) && turno.nombre) {
+  if (Number.isInteger(turno.id)) {
     if (helperDao.agregarElemento(turno, data)) {
       return 'Turno agregado exitosamente';
     }
     throw new Error('Error agregando turno');
   }
-  throw new Error('Envie una turno valido.');
+  throw new Error('Envie un turno valido.');
 };
 
 const eliminarTurno = (id) => {
