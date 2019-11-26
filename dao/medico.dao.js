@@ -29,7 +29,6 @@ const agregarMedico = (medico) => {
 };
 
 const eliminarMedico = (id) => {
-  console.log(id);
   if (!Number.isNaN(id)) {
     if (helperDao.eliminarElemento(id, data)) {
       return 'Medico eliminado exitosamente';
@@ -39,6 +38,11 @@ const eliminarMedico = (id) => {
   throw new Error('Envie un id de medico valido.');
 };
 
+const getForEspecialidad = (especialidad) => {
+  const medicos = getAll();
+  return medicos.filter((medico) => medico.especialidad === especialidad);
+};
+
 module.exports = {
-  get, getAll, agregarMedico, eliminarMedico,
+  get, getAll, agregarMedico, eliminarMedico, getForEspecialidad,
 };

@@ -8,6 +8,8 @@ const agregar = (especialidadNueva) => especialidad.agregarEspecialidad(especial
 
 const eliminar = (id) => especialidad.eliminarEspecialidad(id);
 
+const validar = (nombre) => getAll().map((especialidades) => especialidades.nombre).includes(nombre);
+
 module.exports = {
-  getAll, get, agregar, eliminar,
+  getAll, get, agregar, eliminar, validar,
 };

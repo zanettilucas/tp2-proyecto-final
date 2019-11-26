@@ -1,10 +1,4 @@
-const fs = require('fs');
 const distance = require('google-distance-matrix');
-
-const medicos = JSON.parse(fs.readFileSync('./data/medicos.json'));
-const pacientes = JSON.parse(fs.readFileSync('./data/pacientes.json'));
-
-const obtenerUbicacion = async (id, array) => array.find((x) => x.id === id).ubicacion;
 
 /**
  * calcula distancias.
@@ -12,7 +6,7 @@ const obtenerUbicacion = async (id, array) => array.find((x) => x.id === id).ubi
  * @param {string} destination Destino a calcular.
  * @returns {Promise<object>} Distancia y duracion.
  */
-const calcularDistancia = async (origin, destination) => {
+const calcularDistanciaMatrix = async (origin, destination) => {
   distance.key('AIzaSyDSDU_29QYkLeBel6eA_7qygQ7A8M8bayk');
   // AIzaSyDSDU_29QYkLeBel6eA_7qygQ7A8M8bayk api gonza
   // AIzaSyDQ-gTxue4SexJuOWk1tAMI8-TnKFy5xYs api zane
@@ -29,31 +23,15 @@ const calcularDistancia = async (origin, destination) => {
   });
 };
 
-const calcularDistanciaMP = async (pacienteId, medicoId) => {
+const calcularDistancia = async (ubicacionPaciente, ubicacionMedico) => {
   try {
-    const ubicacionPaciente = await obtenerUbicacion(pacienteId, pacientes);
-    const ubicacionMedico = await obtenerUbicacion(medicoId, medicos);
-    const distanciaYDuracion = await calcularDistancia(ubicacionPaciente, ubicacionMedico);
-    distanciaYDuracion.medicoId = medicoId;
+    const distanciaYDuracion = await calcularDistanciaMatrix(ubicacionPaciente, ubicacionMedico);
     return distanciaYDuracion;
   } catch (e) {
     return 'Error obteniendo ubicación';
   }
 };
 
-const medicosYDistancia = async (pacienteId) => {
-  try {
-    const arrayPromisesDistancia = [];
-    medicos.forEach((medico) => {
-      arrayPromisesDistancia.push(calcularDistanciaMP(pacienteId, medico.id));
-    });
-    return Promise.all(arrayPromisesDistancia);
-  } catch (e) {
-    return 'Error obteniendo ubicación';
-  }
-};
-
 module.exports = {
-  calcularDistanciaMP,
-  medicosYDistancia,
+  calcularDistancia,
 };

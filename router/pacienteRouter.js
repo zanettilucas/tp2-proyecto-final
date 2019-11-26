@@ -98,9 +98,13 @@ const pacienteService = require('../services/paciente.service');
 
 const router = Router();
 
-router.get('/', (req, res, next) => {
+router.get('/:id/sugerencias', async (req, res, next) => {
   try {
-    res.sendData(pacienteService.getAll());
+    const sugerencias = await pacienteService.getMedicosYDistanciaPorEspecialidad(req.params.id, req.query);
+    if (sugerencias !== 'especialidad no valida') {
+      res.sendData(sugerencias);
+    }
+    res.status(404).send(sugerencias);
   } catch (e) {
     res.status(418).send(e);
     next(e);
@@ -112,6 +116,15 @@ router.get('/:id', (req, res, next) => {
     res.sendData(pacienteService.get(req.params.id));
   } catch (e) {
     res.status(404).send(e);
+    next(e);
+  }
+});
+
+router.get('/', (req, res, next) => {
+  try {
+    res.sendData(pacienteService.getAll());
+  } catch (e) {
+    res.status(418).send(e);
     next(e);
   }
 });

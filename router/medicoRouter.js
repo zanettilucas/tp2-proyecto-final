@@ -102,6 +102,13 @@ const router = Router();
 
 router.get('/', (req, res, next) => {
   try {
+    if (req.query.especialidad) {
+      const medicos = medicoService.listadoPorEspecialidad(req.query);
+      if (medicos !== 'especialidad no valida') {
+        res.sendData(medicos);
+      }
+      res.status(404).send(medicos);
+    }
     res.sendData(medicoService.getAll());
   } catch (e) {
     res.status(418).send(e);
