@@ -38,6 +38,24 @@ describe('/GET /medicos?pacienteId=1&distanceMax=1000', () => {
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.have.property('data').to.be.lengthOf(1);
+        expect(res.body).to.have.property('data').to.be.eql([
+          {
+            distance: {
+              distance: { text: '0.8 km', value: 841 },
+              duration: { text: '4 mins', value: 257 },
+              status: 'OK',
+            },
+            m: {
+              id: 4,
+              legajo: 4,
+              nombre: 'Anita',
+              apellido: 'Lapalatina',
+              especialidad: 'Clinico',
+              ubicacion: '-34.6020826, -58.4314074',
+              mail: 'zanettilucas93@gmail.com',
+            },
+          },
+        ]);
         done();
       });
   });
@@ -54,7 +72,6 @@ describe('/GET /medicos?pacienteId=9999&distanceMax=1000', () => {
       });
   });
 });
-
 describe('/GET /medicos', () => {
   it('Devuelve todos los medicos.', (done) => {
     chai.request(server)
@@ -73,6 +90,24 @@ describe('/GET /pacientes/1/sugerencias?especialidad=Clinico&limit=1', () => {
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.have.property('data').to.be.lengthOf(1);
+        expect(res.body).to.have.property('data').to.be.eql([
+          {
+            distance: {
+              distance: { text: '0.8 km', value: 841 },
+              duration: { text: '4 mins', value: 257 },
+              status: 'OK',
+            },
+            medico: {
+              id: 4,
+              legajo: 4,
+              nombre: 'Anita',
+              apellido: 'Lapalatina',
+              especialidad: 'Clinico',
+              ubicacion: '-34.6020826, -58.4314074',
+              mail: 'zanettilucas93@gmail.com',
+            },
+          },
+        ]);
         done();
       });
   });
@@ -89,14 +124,14 @@ describe('/GET /pacientes/1/sugerencias?especialidad=calesita&limit=1', () => {
       });
   });
 });
-
 /*
+
 describe('/GET Especialidades Ok', () => {
   it('Devuelve especialidades', (done) => {
     chai.request(server)
       .get('/medicos/especialidades')
       .end((err, res) => {
-        res.should.have.status(200);
+        expect(res).to.have.status(200);
         done();
       });
   });
@@ -111,7 +146,7 @@ describe('/POST pacientes/turno Ok', () => {
       })
       .end((err, res) => {
         console.log(res.body);
-        res.should.have.status(201);
+        expect(res).to.have.status(201);
         done();
       });
   });
@@ -127,37 +162,7 @@ describe('/POST pacientes/turno Fail medico ocupado', () => {
       })
       .end((err, res) => {
         console.log(res.body);
-        res.should.have.status(418);
-        done();
-      });
-  });
-});
-
-describe('/POST pacientes/turno Fail medico inexistente', () => {
-  it('Devuelve error', (done) => {
-    chai.request(server)
-      .post('/pacientes/turno')
-      .send({
-        dia: 'Viernes 29', hora: '16:05 pm', medicoId: 999, pacienteId: 4,
-      })
-      .end((err, res) => {
-        console.log(res.body);
-        res.should.have.status(418);
-        done();
-      });
-  });
-});
-
-describe('/POST pacientes/turno Fail paciente inexistente', () => {
-  it('Devuelve error', (done) => {
-    chai.request(server)
-      .post('/pacientes/turno')
-      .send({
-        dia: 'Viernes 29', hora: '16:05 pm', medicoId: 3, pacienteId: 787878,
-      })
-      .end((err, res) => {
-        console.log(res.body);
-        res.should.have.status(418);
+        expect(res).to.have.status(418);
         done();
       });
   });
@@ -176,7 +181,7 @@ describe('/POST pacientes Ok', () => {
       })
       .end((err, res) => {
         console.log(res.body);
-        res.should.have.status(201);
+        expect(res).to.have.status(201);
         done();
       });
   });
@@ -195,7 +200,7 @@ describe('/POST pacientes fail', () => {
       })
       .end((err, res) => {
         console.log(res.body);
-        res.should.have.status(400);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -208,8 +213,8 @@ describe('/DELETE pacientes/:id Ok', () => {
       .delete(`/pacientes/${id}`)
       .end((err, res) => {
         console.log(res.body);
-        res.should.have.status(200);
-        done();
+        expect(res).to.have.status(200);
+         done();
       });
   });
 });
@@ -221,7 +226,7 @@ describe('/DELETE pacientes/:id fail', () => {
       .delete(`/pacientes/${id}`)
       .end((err, res) => {
         console.log(res.body);
-        res.should.have.status(404);
+        expect(res).to.have.status(404);
         done();
       });
   });
