@@ -124,7 +124,7 @@ describe('/GET /pacientes/1/sugerencias?especialidad=calesita&limit=1', () => {
       });
   });
 });
-/*
+
 
 describe('/GET Especialidades Ok', () => {
   it('Devuelve especialidades', (done) => {
@@ -231,4 +231,4 @@ describe('/DELETE pacientes/:id fail', () => {
       });
   });
 });
-*/
+
