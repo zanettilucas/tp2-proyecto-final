@@ -50,13 +50,97 @@
       "hayTurno" : true
    },
    { 
+      "id":7,
+      "legajo":7,
+      "nombre":"Luciano",
+      "apellido":"Castro",
+      "especialidad":"Odontologo",
+      "latitud":"-34.568617",
+      "longitud":"-58.456399",
+     
+      "mail":"zanettilucas93@gmail.com",
+      "hayTurno" : true
+   },
+   { 
+      "id":8,
+      "legajo":8,
+      "nombre":"Donald",
+      "apellido":"Trump",
+      "especialidad":"Clinico",
+      "latitud":"-34.569611",
+      "longitud":"-58.450359",
+     
+      "mail":"zanettilucas93@gmail.com",
+      "hayTurno" : true
+   },
+   { 
+      "id":9,
+      "legajo":9,
+      "nombre":"Lucas",
+      "apellido":"Zanata",
+      "especialidad":"Ginecologo",
+      "latitud":"-34.583281",
+      "longitud":"-58.420833",
+     
+      "mail":"zanettilucas93@gmail.com",
+      "hayTurno" : true
+   },
+   { 
+      "id":10,
+      "legajo":10,
+      "nombre":"Juan",
+      "apellido":"Gomez",
+      "especialidad":"Odontologo",
+      "latitud":"-34.609242",
+      "longitud":"-58.404354",
+     
+      "mail":"zanettilucas93@gmail.com",
+      "hayTurno" : true
+   },
+   { 
+      "id":11,
+      "legajo":11,
+      "nombre":"Alejandra",
+      "apellido":"Lemos",
+      "especialidad":"Clinico",
+      "latitud":"-34.634453",
+      "longitud":"-58.390449",
+     
+      "mail":"zanettilucas93@gmail.com",
+      "hayTurno" : true
+   },
+   { 
+      "id":12,
+      "legajo":12,
+      "nombre":"Lionel",
+      "apellido":"Messi",
+      "especialidad":"Odontologo",
+      "latitud":"-34.633102",
+      "longitud":"-58.461563",
+     
+      "mail":"zanettilucas93@gmail.com",
+      "hayTurno" : true
+   },
+   { 
+      "id":2,
+      "legajo":2,
+      "nombre":"Juana",
+      "apellido":"Diaz",
+      "especialidad":"Odontologo",
+      "latitud":"-34.658447",
+      "longitud":"-58.487312",
+     
+      "mail":"zanettilucas93@gmail.com",
+      "hayTurno" : true
+   },
+   { 
 "id" : 6,
       "legajo":6,
       "nombre":"Denus",
       "apellido":"Limons",
       "especialidad":"Ginecologo",
-      "latitud":"-34.656294",
-      "longitud":" -58.4382253",
+      "latitud":"-34.606040",
+      "longitud":"-58.477184",
      
       "mail":"zanettilucas93@gmail.com",
       "hayTurno" : true
