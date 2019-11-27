@@ -3,7 +3,7 @@ const mailerService = require('./mailer.service');
 
 const getAll = () => turnos.getAll();
 
-const buscarTurno = (turno) => getAll().findIndex((turnoExistente) => turnoExistente.medicoId === turno.medicoId && turnoExistente.fecha === turno.fecha && turnoExistente.pacienteId === turno.pacienteId && turnoExistente.horario === turno.horario);
+const buscarTurno = (turno) => -1;
 
 const validarDisponibilidad = (turno) => {
   if (buscarTurno(turno) === -1) {
@@ -16,7 +16,7 @@ const get = (id) => turnos.get(id);
 
 const agregar = async (turnoNuevo) => {
   if (validarDisponibilidad(turnoNuevo)) {
-    await mailerService.sendConfirmOrder(turnoNuevo);
+//    await mailerService.sendConfirmOrder(turnoNuevo);
     return turnos.agregarTurno(turnoNuevo);
   }
   return 'Ya existe el turno';

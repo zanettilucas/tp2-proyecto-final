@@ -95,6 +95,7 @@ module.exports = router;
 */
 const { Router } = require('express');
 const pacienteService = require('../services/paciente.service');
+const pacienteDao = require('../dao/paciente.dao')
 
 const router = Router();
 
@@ -113,7 +114,8 @@ router.get('/:id/sugerencias', async (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   try {
-    res.sendData(pacienteService.get(req.params.id));
+    console.log(req.params)
+    res.sendData(pacienteDao.get(req.params.id));
   } catch (e) {
     res.status(404).send(e);
     next(e);
@@ -131,6 +133,7 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   try {
+    console.log(req.body)
     res.sendData(pacienteService.agregar(req.body));
   } catch (e) {
     res.status(500).send(e);
