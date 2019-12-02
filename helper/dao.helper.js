@@ -1,12 +1,8 @@
 const fs = require('fs');
 
 const getElemento = (id, data) => {
-  try{
   const array = JSON.parse(fs.readFileSync(data));
-  return array.find((p) => p.id === Number(id));}
-  catch(e){
-    return "no encontrado" 
-  }
+  return array.find((p) => p.id === Number(id));
 };
 
 const getElementos = (data) => JSON.parse(fs.readFileSync(data));
