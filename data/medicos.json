@@ -5,13 +5,8 @@
       "nombre":"Juan",
       "apellido":"perez",
       "especialidad":"Odontologo",
-      
-            "latitud":"-34.603651",
-            "longitud":"-58.381678",
-        
-      
-      "mail":"zanettilucas93@gmail.com",
-      "hayTurno" : true
+      "ubicacion":"-34.603651, -58.381678",
+      "mail":"zanettilucas93@gmail.com"
    },
    { 
       "id":3,
@@ -19,11 +14,8 @@
       "nombre":"Rey",
       "apellido":"del Sol",
       "especialidad":"Clinico",
-      "latitud":"-34.626294",
-      "longitud":"-58.4242253",
-      
-      "mail":"zanettilucas93@gmail.com",
-      "hayTurno" : true
+      "ubicacion":"-34.626294, -58.4242253",
+      "mail":"zanettilucas93@gmail.com"
    },
    { 
       "id":4,
@@ -31,11 +23,8 @@
       "nombre":"Anita",
       "apellido":"Lapalatina",
       "especialidad":"Clinico",
-      "latitud":"-34.6020826",
-      "longitud":" -58.4314074",
-      
-      "mail":"zanettilucas93@gmail.com",
-      "hayTurno" : true
+      "ubicacion":"-34.6020826, -58.4314074",
+      "mail":"zanettilucas93@gmail.com"
    },
    { 
       "id":5,
@@ -43,22 +32,7 @@
       "nombre":"Denu",
       "apellido":"Limon",
       "especialidad":"Odontologo",
-      "latitud":"-34.656294",
-      "longitud":" -58.4382253",
-     
-      "mail":"zanettilucas93@gmail.com",
-      "hayTurno" : true
-   },
-   { 
-"id" : 6,
-      "legajo":6,
-      "nombre":"Denus",
-      "apellido":"Limons",
-      "especialidad":"Ginecologo",
-      "latitud":"-34.656294",
-      "longitud":" -58.4382253",
-     
-      "mail":"zanettilucas93@gmail.com",
-      "hayTurno" : true
+      "ubicacion":"-34.656294, -58.4382253",
+      "mail":"zanettilucas93@gmail.com"
    }
 ]
