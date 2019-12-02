@@ -16,8 +16,7 @@ const get = (id) => turnos.get(id);
 
 const agregar = async (turnoNuevo) => {
   if (validarDisponibilidad(turnoNuevo)) {
-    //    await mailerService.sendConfirmOrder(turnoNuevo);
-    console.log('entre para crear el turno');
+//    await mailerService.sendConfirmOrder(turnoNuevo);
     return turnos.agregarTurno(turnoNuevo);
   }
   return 'Ya existe el turno';

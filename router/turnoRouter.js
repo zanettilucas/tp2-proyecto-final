@@ -23,9 +23,6 @@ router.get('/:id', (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log('entre');
-    console.log(req.body);
-    res.setHeader('Access-Control-Allow-Origin', '*');
     res.sendData(await turnoService.agregar(req.body));
   } catch (e) {
     res.status(500).send('Envie un turno valido');

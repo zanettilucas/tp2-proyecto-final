@@ -1,16 +1,15 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const env = require('dotenv').load();
-const cors = require('cors');
 const models = require('./models');
 const router = require('./router');
+
 
 const app = express();
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
 
 app.use((req, res, next) => {
   // save the models in the context
@@ -29,6 +28,7 @@ app.use((req, res, next) => {
       status: 200,
       data,
     };
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.send(response);
   };
   next();
