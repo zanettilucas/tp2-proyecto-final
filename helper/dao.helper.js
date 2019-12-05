@@ -20,7 +20,7 @@ const agregarElemento = (elemento, data) => {
 };
 
 const eliminarElemento = (id, data) => {
-  console.log(id);
+  //console.log(id);
   const array = JSON.parse(fs.readFileSync(data));
   const index = buscarElemento(Number(id), array);
   if (index !== -1) {

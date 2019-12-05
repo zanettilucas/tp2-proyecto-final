@@ -12,7 +12,6 @@ const get = (id) => {
 };
 
 const getAll = () => {
-  console.log(data);
   const especialidades = helperDao.getElementos(data);
   if (especialidades) {
     return especialidades;

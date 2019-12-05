@@ -103,7 +103,6 @@ router.get('/:id/sugerencias', async (req, res, next) => {
     res.sendData(await pacienteService.getMedicosYDistanciaPorEspecialidad(req.params.id, req.query));
   } catch (e) {
     res.status(e.status).send(e.desc);
-    next(e);
   }
 });
 
@@ -112,7 +111,6 @@ router.get('/:id', (req, res, next) => {
     res.sendData(pacienteService.get(req.params.id));
   } catch (e) {
     res.status(404).send(e);
-    next(e);
   }
 });
 
@@ -121,7 +119,6 @@ router.get('/', (req, res, next) => {
     res.sendData(pacienteService.getAll());
   } catch (e) {
     res.status(418).send(e);
-    next(e);
   }
 });
 
@@ -130,7 +127,6 @@ router.post('/', (req, res, next) => {
     res.sendData(pacienteService.agregar(req.body));
   } catch (e) {
     res.status(500).send(e);
-    next(e);
   }
 });
 
@@ -139,7 +135,6 @@ router.delete('/:id', (req, res, next) => {
     res.sendData(pacienteService.eliminar(req.params.id));
   } catch (e) {
     res.status(404).send(e);
-    next(e);
   }
 });
 

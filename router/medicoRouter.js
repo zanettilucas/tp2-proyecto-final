@@ -110,8 +110,7 @@ router.get('/', async (req, res, next) => {
     }
     return res.sendData(medicoService.getAll());
   } catch (e) {
-    res.status(e.status).send(e.desc);
-    return next(e);
+    return res.status(e.status).send(e.desc);
   }
 });
 
@@ -120,7 +119,6 @@ router.get('/:id', (req, res, next) => {
     res.sendData(medicoService.get(req.params.id));
   } catch (e) {
     res.status(404).send(e);
-    next(e);
   }
 });
 
@@ -129,7 +127,6 @@ router.post('/', (req, res, next) => {
     res.sendData(medicoService.agregar(req.body));
   } catch (e) {
     res.status(500).send(e);
-    next(e);
   }
 });
 
@@ -138,7 +135,6 @@ router.delete('/:id', (req, res, next) => {
     res.sendData(medicoService.eliminar(req.params.id));
   } catch (e) {
     res.status(404).send(e);
-    next(e);
   }
 });
 
