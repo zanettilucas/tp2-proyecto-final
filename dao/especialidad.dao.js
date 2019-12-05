@@ -1,6 +1,7 @@
 const helperDao = require('../helper/dao.helper');
+const config = require('../config/config');
 
-const data = './data/especialidades.json';
+const data = `${config.data}especialidades.json`;
 
 const get = (id) => {
   const especialidad = helperDao.getElemento(id, data);
@@ -11,6 +12,7 @@ const get = (id) => {
 };
 
 const getAll = () => {
+  console.log(data);
   const especialidades = helperDao.getElementos(data);
   if (especialidades) {
     return especialidades;
@@ -29,7 +31,6 @@ const agregarEspecialidad = (especialidad) => {
 };
 
 const eliminarEspecialidad = (id) => {
-  console.log(id);
   if (!Number.isNaN(id)) {
     if (helperDao.eliminarElemento(id, data)) {
       return 'Especialidad eliminada exitosamente';

@@ -103,23 +103,15 @@ const router = Router();
 router.get('/', async (req, res, next) => {
   try {
     if (req.query.especialidad) {
-      const medicos = await medicoService.listadoPorEspecialidad(req.query);
-      if (medicos !== 'Especialidad no valida') {
-        return res.sendData(medicos);
-      }
-      return res.status(404).send({ data: medicos });
+      return res.sendData(await medicoService.listadoPorEspecialidad(req.query));
     }
     if (req.query.pacienteId) {
-      const medicos = await medicoService.getDistanciaMedicosPorPaciente(req.query);
-      if (medicos !== 'Paciente no encontrado') {
-        return res.sendData(medicos);
-      }
-      return res.status(404).send({ data: medicos });
+      return res.sendData(await medicoService.getDistanciaMedicosPorPaciente(req.query));
     }
-    res.sendData(medicoService.getAll());
+    return res.sendData(medicoService.getAll());
   } catch (e) {
-    res.status(418).send(e);
-    next(e);
+    res.status(e.status).send(e.desc);
+    return next(e);
   }
 });
 

@@ -1,6 +1,8 @@
 const helperDao = require('../helper/dao.helper');
 
-const data = './data/pacientes.json';
+const config = require('../config/config');
+
+const data = `${config.data}pacientes.json`;
 
 const get = (id) => {
   const paciente = helperDao.getElemento(id, data);
@@ -29,7 +31,6 @@ const agregarPaciente = (paciente) => {
 };
 
 const eliminarPaciente = (id) => {
-  console.log(id);
   if (!Number.isNaN(id)) {
     if (helperDao.eliminarElemento(id, data)) {
       return 'Paciente eliminado exitosamente';

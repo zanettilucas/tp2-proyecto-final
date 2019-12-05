@@ -1,6 +1,7 @@
 const helperDao = require('../helper/dao.helper');
+const config = require('../config/config');
 
-const data = './data/medicos.json';
+const data = `${config.data}medicos.json`;
 
 const get = (id) => {
   const medico = helperDao.getElemento(id, data);

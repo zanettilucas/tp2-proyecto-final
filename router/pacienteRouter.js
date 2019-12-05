@@ -100,13 +100,9 @@ const router = Router();
 
 router.get('/:id/sugerencias', async (req, res, next) => {
   try {
-    const sugerencias = await pacienteService.getMedicosYDistanciaPorEspecialidad(req.params.id, req.query);
-    if (sugerencias !== 'especialidad no valida') {
-      return res.sendData(sugerencias);
-    }
-    return res.status(404).send({ data: sugerencias });
+    res.sendData(await pacienteService.getMedicosYDistanciaPorEspecialidad(req.params.id, req.query));
   } catch (e) {
-    res.status(418).send(e);
+    res.status(e.status).send(e.desc);
     next(e);
   }
 });

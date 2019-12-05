@@ -1,0 +1,38 @@
+[ 
+   { 
+      "id":1,
+      "legajo":1,
+      "nombre":"Juan",
+      "apellido":"perez",
+      "especialidad":"Clinico",
+      "ubicacion":"-34.6071383,-58.4257513", 
+      "mail":"zanettilucas93@gmail.com"
+   },
+   { 
+      "id":2,
+      "legajo":2,
+      "nombre":"Rey",
+      "apellido":"del Sol",
+      "especialidad":"Clinico",
+      "ubicacion":"-34.5943513,-58.4439676",
+      "mail":"zanettilucas93@gmail.com"
+   },
+   { 
+      "id":3,
+      "legajo":3,
+      "nombre":"Anita",
+      "apellido":"Lapalatina",
+      "especialidad":"Odontologo",
+      "ubicacion":"-34.553454,-58.5603969",
+      "mail":"zanettilucas93@gmail.com"
+   },
+   { 
+      "id":4,
+      "legajo":4,
+      "nombre":"Denu",
+      "apellido":"Limon",
+      "especialidad":"Odontologo",
+      "ubicacion":"-26.5076909,-61.1791417",
+      "mail":"zanettilucas93@gmail.com"
+   }
+]

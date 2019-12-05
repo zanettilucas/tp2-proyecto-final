@@ -1,6 +1,8 @@
 const helperDao = require('../helper/dao.helper');
 
-const data = './data/turnos.json';
+const config = require('../config/config');
+
+const data = `${config.data}turnos.json`;
 
 const get = (id) => {
   const turno = helperDao.getElemento(id, data);
@@ -29,7 +31,6 @@ const agregarTurno = (turno) => {
 };
 
 const eliminarTurno = (id) => {
-  console.log(id);
   if (!Number.isNaN(id)) {
     if (helperDao.eliminarElemento(id, data)) {
       return 'Turno eliminado exitosamente';
